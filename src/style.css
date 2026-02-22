@@ -127,61 +127,83 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .day-arrow{font-size:11px;color:#1a73e8;cursor:pointer;font-weight:500;max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .day-arrow:hover{text-decoration:underline}
 .day-arrow-next{text-align:right;margin-left:auto}
+/* === BOTTOM SHEET === */
+.bottom-sheet{display:none}
+.bottom-bar{display:none}
 @media(max-width:768px){
-  .mobile-nav{display:flex;height:50px}
-  .mobile-nav button{font-size:14px}
+  /* === LAYOUT: map fullscreen, panel hidden === */
   body{flex-direction:column;overflow:hidden;height:100vh}
-  .panel{width:100%!important;min-width:0!important;height:calc(100vh - 50px);margin-top:50px;border-right:none}
-  #map{height:calc(100vh - 50px);margin-top:50px;width:100%}
-  body.m-map .panel{display:none}
-  body.m-list #map{display:none}
-  body.m-map .map-filter-btn{display:flex}
-  .map-day-bar{display:flex!important}
-  .dc{padding:14px 16px}
-  .dd{font-size:13px}
-  .dt{font-size:12px}
-  .dr{font-size:11px}
-  .ds{font-size:12px;padding:9px 11px}
-  .ds h4{font-size:12px}
-  .ds li{margin-bottom:3px;min-height:32px;display:flex;align-items:center}
-  .ds a{font-size:12px}
-  .food-item{min-height:36px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
-  .prog-link{min-height:40px;display:flex;align-items:center}
-  .main-tabs button{padding:14px 10px;font-size:13px}
-  .tab-pane .budget-inner{font-size:12px}
-  .budget-inner h4{font-size:12px}
-  .budget-inner .pack-item{min-height:40px;display:flex;align-items:center;font-size:12px}
-  .budget-inner .pack-cat{font-size:12px}
-  .budget-inner .brow{padding:6px 0;font-size:12px}
-  .budget-inner .note{font-size:11px}
-  .budget-inner td{font-size:12px;padding:6px 8px}
-  .budget-inner th{font-size:11px;padding:6px 8px}
+  .mobile-nav{display:none!important}
+  .panel{display:none!important}
+  #map{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;width:100vw!important;margin:0;z-index:1}
+
+  /* === BOTTOM BAR (fixed at bottom) === */
+  .bottom-bar{display:flex;position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;border-top:1px solid #dadce0;z-index:1100;align-items:center;padding:0 8px;gap:4px;box-shadow:0 -2px 8px rgba(0,0,0,.1);padding-bottom:env(safe-area-inset-bottom)}
+  .bottom-bar button{width:36px;height:36px;border-radius:50%;border:2px solid #dadce0;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#5f6368;transition:all .15s;flex-shrink:0;padding:0}
+  .bottom-bar button:hover{background:#f1f3f4}
+  .bottom-bar button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
+  .bottom-bar button.dn-easter{border-color:#ea4335}
+  .bottom-bar button.dn-easter.dn-on{background:#ea4335;border-color:#ea4335}
+  .bottom-bar .bb-hamburger{width:40px;height:40px;border:none;border-radius:50%;background:#f1f3f4;font-size:20px;color:#5f6368;margin-left:auto;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+  /* === BOTTOM SHEET === */
+  .bottom-sheet{display:block;position:fixed;left:0;right:0;bottom:calc(56px + env(safe-area-inset-bottom));z-index:1050;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.15);will-change:transform;transition:height .3s cubic-bezier(.4,0,.2,1);overflow:hidden}
+  .bs-handle{padding:10px 0 6px;cursor:grab;touch-action:none;display:flex;justify-content:center}
+  .bs-handle-bar{width:36px;height:4px;border-radius:2px;background:#dadce0}
+  .bs-content{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+  /* === DAY CONTENT inside bottom sheet === */
+  .bs-content .dc{padding:14px 16px;border-bottom:1px solid #f0f0f0;cursor:default}
+  .bs-content .dc.on{background:#e8f0fe;border-left:3px solid #1a73e8}
+  .bs-content .dc.easter-bg{background:#fef7f0}
+  .bs-content .dc.easter-bg.on{background:#fce8e6;border-left-color:#ea4335}
+  .bs-content .dh{display:flex;align-items:center;gap:7px}
+  .bs-content .dn{background:#1a73e8;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+  .bs-content .dc.easter-bg .dn{background:#ea4335}
+  .bs-content .dd{font-weight:600;font-size:13px;color:#202124}
+  .bs-content .dt{font-size:12px;color:#5f6368;margin-left:31px}
+  .bs-content .dr{font-size:11px;color:#9aa0a6;margin-left:31px;margin-top:1px}
+  .bs-content .det{display:block;padding:4px 14px 12px}
+  .bs-content .ds{font-size:12px;padding:9px 11px;margin-top:6px;background:#f8f9fa;border-radius:6px}
+  .bs-content .ds h4{font-size:12px}
+  .bs-content .ds li{margin-bottom:3px;min-height:32px;display:flex;align-items:center}
+  .bs-content .ds a{font-size:12px}
+  .bs-content .food-item{min-height:36px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+  .bs-content .prog-link{min-height:40px;display:flex;align-items:center}
+  .bs-content .day-map-cta{font-size:13px;padding:12px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  .bs-content .day-arrows{display:flex;justify-content:space-between;padding:12px 0;margin-top:8px;border-top:1px solid #e0e0e0;gap:8px}
+  .bs-content .day-arrow{font-size:13px;min-height:44px;display:flex;align-items:center}
+
+  /* === SECONDARY TAB CONTENT in sheet === */
+  .bs-content .budget-inner{padding:12px 14px;font-size:12px;line-height:1.6}
+  .bs-content .budget-inner h4{font-size:12px}
+  .bs-content .budget-inner .pack-item{min-height:40px;display:flex;align-items:center;font-size:12px}
+  .bs-content .budget-inner .pack-cat{font-size:12px}
+  .bs-content .budget-inner .brow{padding:6px 0;font-size:12px}
+  .bs-content .budget-inner .note{font-size:11px}
+  .bs-content .budget-inner td{font-size:12px;padding:6px 8px}
+  .bs-content .budget-inner th{font-size:11px;padding:6px 8px}
+
+  /* === MAP ADJUSTMENTS === */
+  .map-filter-btn{display:flex!important;bottom:calc(35vh + 80px)}
+  .map-filter-overlay{bottom:calc(35vh + 134px)}
+  .map-day-bar{display:none!important}
+  .map-back-btn{display:none!important}
+
+  /* === POPUPS === */
   .leaflet-popup-content{font-size:14px}
   .pop-badge{font-size:10px}
   .pop-link{font-size:12px;min-height:0;display:block;padding:2px 0}
-  .extra-toggle button{font-size:13px;padding:12px}
-  .ex{padding:12px 14px;font-size:12px}
-  .leg{padding:10px 14px;font-size:12px;gap:12px}
-  .leg-i{gap:5px;min-height:36px}
-  .leg-d{width:10px;height:10px}
-  .acc-name{font-size:13px}
-  .acc-detail{font-size:11px}
-  .acc-price{font-size:12px}
-  .acc-links a{font-size:12px;min-height:40px;display:inline-flex;align-items:center}
-  .scroll{padding-bottom:70px}
-  .day-nav{gap:6px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .day-nav::-webkit-scrollbar{display:none}
-  .day-nav button{width:36px;height:36px;font-size:13px}
-  .day-map-cta{font-size:13px;padding:12px;min-height:44px;display:flex;align-items:center;justify-content:center}
   .pop-day-link{font-size:11px;padding:4px 10px;min-height:0;display:block;width:fit-content}
-  .day-arrow{font-size:13px;min-height:44px;display:flex;align-items:center}
-  .chip-easter{display:none}
-  .leg{display:none}
-  .panel-head{display:none}
-  .main-tabs{display:none}
-  .day-nav{display:none}
-  .extra-toggle{display:none}
-  .extra-list{display:none}
+
+  /* === BOTTOM DRAWER (secondary tabs) === */
+  .drawer{top:auto;left:0;right:0;bottom:0;width:100%;max-width:100%;height:auto;max-height:85vh;transform:translateY(100%);border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+  .drawer.open{transform:translateY(0)}
+  .drawer-head{padding:16px;border-bottom:1px solid #e0e0e0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
+  .drawer-head h2{font-size:16px;flex:1;margin-bottom:4px}
+  .drawer-head .drawer-sub{width:100%;margin:0}
+  .drawer-close{width:36px;height:36px;border:none;border-radius:50%;background:#f1f3f4;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5f6368;order:-1}
+  .drawer-links button{font-size:15px;padding:16px;min-height:52px}
 }
 .acc-section{margin-bottom:16px}
 .acc-section h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:600;color:#e91e63;margin:10px 0 6px}

@@ -118,53 +118,55 @@ function getDays(){
 
 function render(){
   var days=getDays(),h="";
-  h+='<div class="day-nav">';
-  days.forEach(function(d,i){
-    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
-    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
-  });
-  h+='</div>';
   var isMobile = window.innerWidth <= 768;
-  if(isMobile){
-    // Mobile: show only the active day, fully expanded
+  var bsEl = document.getElementById('bsContent');
+  if(isMobile && bsEl){
+    // Mobile: render into bottom sheet
     if(ad===null) ad=0;
     var d=days[ad], i=ad;
-    h+='<div class="dc on'+(d.easter?' easter-bg':'')+'">';
-    h+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
-    h+='<div class="dt">'+d.title+'</div>';
+    var sh='<div class="dc on'+(d.easter?' easter-bg':'')+'">';
+    sh+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
+    sh+='<div class="dt">'+d.title+'</div>';
     var cityOnly=d.nocleg?d.nocleg.split(' \u00b7 ')[0]:null;
-    h+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
-    h+='<div class="det show">';
-    if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
-    h+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
-    h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
+    sh+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
+    sh+='<div class="det">';
+    if(d.split) sh+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
+    sh+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
+    sh+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
     d.food.forEach(function(f){
-      h+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
-      if(f[1]) h+=' <span class="food-stars">&#11088; '+f[1]+'</span>';
-      if(f[2]) h+=' <span style="color:#5f6368">'+f[2]+'</span>';
-      if(f[3]) h+=' <a href="'+f[3]+'" target="_blank">Maps</a>';
-      h+="</div>";
+      sh+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
+      if(f[1]) sh+=' <span class="food-stars">&#11088; '+f[1]+'</span>';
+      if(f[2]) sh+=' <span style="color:#5f6368">'+f[2]+'</span>';
+      if(f[3]) sh+=' <a href="'+f[3]+'" target="_blank">Maps</a>';
+      sh+="</div>";
     });
-    h+="</div>";
-    h+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
-    d.tips.forEach(function(t){h+="<li>"+t+"</li>";});
-    h+="</ul></div>";
-    h+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
+    sh+="</div>";
+    sh+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
+    d.tips.forEach(function(t){sh+="<li>"+t+"</li>";});
+    sh+="</ul></div>";
+    sh+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
     if(d.nocleg){
       var nCity=d.nocleg.split(' \u00b7 ')[0];
-      h+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
+      sh+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
     }
-    h+='</div>'; // close .det
-    // Nav arrows
-    h+='<div class="day-arrows">';
-    if(ad>0) h+='<div class="day-arrow day-arrow-prev" onclick="sel('+(ad-1)+')">&larr; Dzie\u0144 '+days[ad-1].num+' &middot; '+days[ad-1].title+'</div>';
-    else h+='<div class="day-arrow"></div>';
-    if(ad<days.length-1) h+='<div class="day-arrow day-arrow-next" onclick="sel('+(ad+1)+')">Dzie\u0144 '+days[ad+1].num+' &middot; '+days[ad+1].title+' &rarr;</div>';
-    else h+='<div class="day-arrow"></div>';
-    h+='</div>';
-    h+='</div>'; // close .dc
+    sh+='</div>';
+    sh+='<div class="day-arrows">';
+    if(ad>0) sh+='<div class="day-arrow day-arrow-prev" onclick="sel('+(ad-1)+')">&larr; Dzie\u0144 '+days[ad-1].num+' &middot; '+days[ad-1].title+'</div>';
+    else sh+='<div class="day-arrow"></div>';
+    if(ad<days.length-1) sh+='<div class="day-arrow day-arrow-next" onclick="sel('+(ad+1)+')">Dzie\u0144 '+days[ad+1].num+' &middot; '+days[ad+1].title+' &rarr;</div>';
+    else sh+='<div class="day-arrow"></div>';
+    sh+='</div>';
+    sh+='</div>';
+    bsEl.innerHTML=sh;
+    document.getElementById("daysList").innerHTML='';
   } else {
-    // Desktop: existing list+accordion
+    // Desktop: day-nav + accordion list
+    h+='<div class="day-nav">';
+    days.forEach(function(d,i){
+      var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+      h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+    });
+    h+='</div>';
     days.forEach(function(d,i){
       var cls="dc"+(d.easter?" easter-bg":"")+(ad===i?" on":"");
       h+='<div class="'+cls+'" onclick="sel('+i+')">';
@@ -194,8 +196,8 @@ function render(){
       }
       h+="</div></div>";
     });
+    document.getElementById("daysList").innerHTML=h;
   }
-  document.getElementById("daysList").innerHTML=h;
 }
 
 function sel(i){
@@ -203,6 +205,10 @@ function sel(i){
   else ad=ad===i?null:i;
   render();
   renderMapDayBar();
+  if(window.innerWidth<=768){
+    renderBottomBar();
+    setSheetSnap(SNAP_PEEK);
+  }
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
     if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
@@ -249,14 +255,14 @@ function flyTo(id){
   if(markers[id]){
     var m=markers[id].m;
     if(!map.hasLayer(m))m.addTo(map);
-    if(window.innerWidth<=768){mobileView('map');showBackBtn();}
+    if(window.innerWidth<=768){setSheetSnap(SNAP_PEEK);}
     map.setView(m.getLatLng(),12);
     setTimeout(function(){m.openPopup();},200);
   }
 }
 
 function goToDay(i){
-  if(window.innerWidth<=768) mobileView('list');
+  if(window.innerWidth<=768) setSheetSnap(SNAP_HALF);
   ad=i;
   render();
   var scrollEl=document.getElementById('daysList');
@@ -266,13 +272,29 @@ function goToDay(i){
 function showDayOnMap(i){
   var days=getDays(),d=days[i],bounds=[];
   d.points.forEach(function(pid){if(markers[pid])bounds.push(markers[pid].m.getLatLng());});
-  if(window.innerWidth<=768){mobileView('map');showBackBtn();}
+  if(window.innerWidth<=768){setSheetSnap(SNAP_PEEK);}
   if(bounds.length>1)map.fitBounds(bounds,{padding:[50,50],maxZoom:12});
   else if(bounds.length===1)map.setView(bounds[0],12);
   highlightDayMarkers(d.points);
 }
 
 function goToNocleg(city){
+  if(window.innerWidth<=768){
+    drawerTab('noclegi');
+    setTimeout(function(){
+      var headers=document.querySelectorAll('#noclegiPanel h4');
+      var parts=city.split(/ lub | \/ /);
+      for(var i=0;i<headers.length;i++){
+        for(var p=0;p<parts.length;p++){
+          if(headers[i].textContent.indexOf(parts[p].trim())!==-1){
+            headers[i].scrollIntoView({behavior:'smooth',block:'start'});
+            return;
+          }
+        }
+      }
+    },100);
+    return;
+  }
   var btn=document.querySelector('.main-tabs button:nth-child(2)');
   mainTab('noclegi',btn);
   setTimeout(function(){
@@ -556,8 +578,120 @@ function renderMapDayBar(){
   bar.innerHTML=h;
 }
 
+// === BOTTOM BAR ===
+function renderBottomBar(){
+  var bar=document.getElementById('bottomBar');
+  if(!bar) return;
+  var days=getDays(),h='';
+  days.forEach(function(d,i){
+    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+  });
+  h+='<button class="bb-hamburger" onclick="toggleDrawer()">☰</button>';
+  bar.innerHTML=h;
+}
+
+// === BOTTOM SHEET GESTURES ===
+var SNAP_PEEK=0.35, SNAP_HALF=0.60, SNAP_FULL=0.92;
+var sheetSnap=SNAP_PEEK;
+var sheetDragging=false;
+var sheetStartY=0, sheetStartSnap=0;
+
+function setSheetSnap(snap){
+  sheetSnap=snap;
+  var sheet=document.getElementById('bottomSheet');
+  if(!sheet) return;
+  var vh=window.innerHeight;
+  var barH=56;
+  var maxH=vh-barH;
+  var h=Math.round(snap*maxH);
+  sheet.style.height=h+'px';
+  sheet.style.transition='height .3s cubic-bezier(.4,0,.2,1)';
+  var content=document.getElementById('bsContent');
+  if(content){
+    var handleH=40;
+    content.style.height=(h-handleH)+'px';
+    if(snap>=SNAP_FULL-0.01){
+      content.style.overflowY='auto';
+    } else {
+      content.style.overflowY='hidden';
+      content.scrollTop=0;
+    }
+  }
+  setTimeout(function(){if(typeof map!=='undefined')map.invalidateSize();},350);
+}
+
+function initSheetGestures(){
+  var handle=document.getElementById('bsHandle');
+  var sheet=document.getElementById('bottomSheet');
+  var content=document.getElementById('bsContent');
+  if(!handle||!sheet) return;
+
+  handle.addEventListener('touchstart',function(e){
+    sheetDragging=true;
+    sheetStartY=e.touches[0].clientY;
+    sheetStartSnap=sheetSnap;
+    sheet.style.transition='none';
+  },{passive:true});
+
+  document.addEventListener('touchmove',function(e){
+    if(!sheetDragging) return;
+    var dy=sheetStartY-e.touches[0].clientY;
+    var vh=window.innerHeight;
+    var barH=56;
+    var maxH=vh-barH;
+    var newH=Math.round(sheetStartSnap*maxH)+dy;
+    newH=Math.max(80,Math.min(maxH,newH));
+    sheet.style.height=newH+'px';
+    if(content){
+      var handleH=40;
+      content.style.height=(newH-handleH)+'px';
+      content.style.overflowY='hidden';
+    }
+  },{passive:true});
+
+  document.addEventListener('touchend',function(e){
+    if(!sheetDragging) return;
+    sheetDragging=false;
+    var vh=window.innerHeight;
+    var barH=56;
+    var maxH=vh-barH;
+    var currentH=parseInt(sheet.style.height)||0;
+    var currentRatio=currentH/maxH;
+    var snaps=[SNAP_PEEK,SNAP_HALF,SNAP_FULL];
+    var closest=snaps[0];
+    snaps.forEach(function(s){
+      if(Math.abs(s-currentRatio)<Math.abs(closest-currentRatio)) closest=s;
+    });
+    setSheetSnap(closest);
+  },{passive:true});
+
+  // Content drag-to-resize: when at top of scroll in half/peek, drag up to expand
+  var contentStartY=0;
+  content.addEventListener('touchstart',function(e){
+    contentStartY=e.touches[0].clientY;
+  },{passive:true});
+
+  content.addEventListener('touchmove',function(e){
+    if(sheetDragging) return;
+    if(sheetSnap>=SNAP_FULL-0.01 && content.scrollTop>0) return;
+    if(content.scrollTop<=0){
+      var dy=contentStartY-e.touches[0].clientY;
+      if((dy>10 && sheetSnap<SNAP_FULL)||(dy<-10 && sheetSnap>SNAP_PEEK)){
+        sheetDragging=true;
+        sheetStartY=contentStartY;
+        sheetStartSnap=sheetSnap;
+        sheet.style.transition='none';
+      }
+    }
+  },{passive:true});
+
+  setSheetSnap(SNAP_PEEK);
+}
+
 // === MOBILE VIEW ===
 function mobileView(v){
+  if(window.innerWidth<=768 && document.getElementById('bottomSheet')) return;
   var b=document.body;
   if(v==='map'){
     b.classList.add('m-map');b.classList.remove('m-list');
@@ -572,11 +706,14 @@ function mobileView(v){
     var ov=document.getElementById('mapFilterOverlay');if(ov)ov.classList.remove('show');
   }
 }
-if(window.innerWidth<=768)document.body.classList.add('m-list');
+// Bottom sheet mode: m-list/m-map no longer needed on mobile
 window.addEventListener('resize',function(){
   if(window.innerWidth>768){
     document.body.classList.remove('m-map','m-list');
     if(typeof map!=='undefined')map.invalidateSize();
+  } else {
+    if(typeof setSheetSnap==='function') setSheetSnap(sheetSnap);
+    renderBottomBar();
   }
   render();
 });
@@ -585,15 +722,14 @@ window.addEventListener('resize',function(){
 (function(){
   var startX=0,startY=0;
   document.addEventListener('touchstart',function(e){
-    var scrollEl=document.getElementById('daysList');
-    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    var target=window.innerWidth<=768?document.getElementById('bsContent'):document.getElementById('daysList');
+    if(!target||!target.contains(e.target)) return;
     startX=e.touches[0].clientX;
     startY=e.touches[0].clientY;
   },{passive:true});
   document.addEventListener('touchend',function(e){
-    if(window.innerWidth>768) return;
-    var scrollEl=document.getElementById('daysList');
-    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    var target=window.innerWidth<=768?document.getElementById('bsContent'):document.getElementById('daysList');
+    if(!target||!target.contains(e.target)) return;
     var endX=e.changedTouches[0].clientX;
     var endY=e.changedTouches[0].clientY;
     var dx=endX-startX;
@@ -613,6 +749,22 @@ function toggleDrawer(){
 }
 function drawerTab(tab){
   toggleDrawer();
+  if(window.innerWidth<=768){
+    var bsEl=document.getElementById('bsContent');
+    if(!bsEl) return;
+    if(tab==='plan'){
+      render();
+      renderBottomBar();
+      setSheetSnap(SNAP_PEEK);
+      return;
+    }
+    if(tab==='budget'){bsEl.innerHTML='<div class="budget-inner" id="budgetPanel"></div>';renderBudget();}
+    else if(tab==='packing'){bsEl.innerHTML='<div class="budget-inner" id="packingPanel"></div>';renderPacking();}
+    else if(tab==='noclegi'){bsEl.innerHTML='<div class="budget-inner" id="noclegiPanel"></div>';renderNoclegi();}
+    else if(tab==='ankieta'){bsEl.innerHTML='<div class="budget-inner" id="ankietaPanel"></div>';renderAnkieta();}
+    setSheetSnap(SNAP_FULL);
+    return;
+  }
   var btn=document.querySelector('.main-tabs button');
   document.querySelectorAll('.main-tabs button').forEach(function(b){
     b.classList.remove('on');
@@ -631,3 +783,12 @@ renderPacking();
 renderNoclegi();
 renderAnkieta();
 renderMapDayBar();
+renderBottomBar();
+if(window.innerWidth<=768) initSheetGestures();
+if(window.innerWidth<=768 && ad!==null){
+  var initDays=getDays(),initD=initDays[ad],initBounds=[];
+  initD.points.forEach(function(pid){if(markers[pid])initBounds.push(markers[pid].m.getLatLng());});
+  if(initBounds.length>1)map.fitBounds(initBounds,{padding:[50,50],maxZoom:11});
+  else if(initBounds.length===1)map.setView(initBounds[0],11);
+  setTimeout(function(){highlightDayMarkers(initD.points);},100);
+}
