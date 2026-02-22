@@ -181,6 +181,7 @@ function sel(i){
   if(window.innerWidth<=768) ad=i;
   else ad=ad===i?null:i;
   render();
+  renderMapDayBar();
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
     if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
@@ -497,18 +498,41 @@ function highlightDayMarkers(dayPoints){
     if(!el) return;
     var dot=el.querySelector('.cm');
     if(!dot) return;
+    // Remove any existing day badge
+    var existing=dot.querySelector('.cm-day');
+    if(existing) existing.remove();
     if(!dayPoints){
       dot.classList.remove('cm-dim','cm-highlight');
       return;
     }
     if(dayPoints.indexOf(id)!==-1){
+      // Active day marker: highlight, no badge
       dot.classList.remove('cm-dim');
       dot.classList.add('cm-highlight');
     }else{
+      // Dimmed marker: show day number badge
       dot.classList.remove('cm-highlight');
       dot.classList.add('cm-dim');
+      if(attrToDays[id]){
+        var badge=document.createElement('span');
+        badge.className='cm-day';
+        badge.textContent=attrToDays[id].map(function(di){return di+1;}).join(',');
+        dot.appendChild(badge);
+      }
     }
   });
+}
+
+// === MAP DAY BAR ===
+function renderMapDayBar(){
+  var bar=document.getElementById('mapDayBar');
+  if(!bar) return;
+  var days=getDays(),h='';
+  days.forEach(function(d,i){
+    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+  });
+  bar.innerHTML=h;
 }
 
 // === MOBILE VIEW ===
@@ -519,6 +543,7 @@ function mobileView(v){
     document.getElementById('btn-map').classList.add('active');
     document.getElementById('btn-list').classList.remove('active');
     setTimeout(function(){if(typeof map!=='undefined')map.invalidateSize();},150);
+    renderMapDayBar();
   }else{
     b.classList.add('m-list');b.classList.remove('m-map');
     document.getElementById('btn-list').classList.add('active');
@@ -567,3 +592,4 @@ renderBudget();
 renderPacking();
 renderNoclegi();
 renderAnkieta();
+renderMapDayBar();
