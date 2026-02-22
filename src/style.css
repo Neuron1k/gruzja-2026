@@ -157,6 +157,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .day-nav button{width:36px;height:36px;font-size:13px}
   .day-map-cta{font-size:13px;padding:12px;min-height:44px;display:flex;align-items:center;justify-content:center}
   .pop-day-link{font-size:12px;padding:5px 10px;min-height:36px;display:inline-flex;align-items:center}
+  .chip-easter{display:none}
+  .leg{display:none}
 }
 .acc-section{margin-bottom:16px}
 .acc-section h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:600;color:#e91e63;margin:10px 0 6px}
