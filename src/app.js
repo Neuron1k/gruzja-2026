@@ -118,53 +118,55 @@ function getDays(){
 
 function render(){
   var days=getDays(),h="";
-  h+='<div class="day-nav">';
-  days.forEach(function(d,i){
-    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
-    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
-  });
-  h+='</div>';
   var isMobile = window.innerWidth <= 768;
-  if(isMobile){
-    // Mobile: show only the active day, fully expanded
+  var bsEl = document.getElementById('bsContent');
+  if(isMobile && bsEl){
+    // Mobile: render into bottom sheet
     if(ad===null) ad=0;
     var d=days[ad], i=ad;
-    h+='<div class="dc on'+(d.easter?' easter-bg':'')+'">';
-    h+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
-    h+='<div class="dt">'+d.title+'</div>';
+    var sh='<div class="dc on'+(d.easter?' easter-bg':'')+'">';
+    sh+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
+    sh+='<div class="dt">'+d.title+'</div>';
     var cityOnly=d.nocleg?d.nocleg.split(' \u00b7 ')[0]:null;
-    h+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
-    h+='<div class="det show">';
-    if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
-    h+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
-    h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
+    sh+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
+    sh+='<div class="det">';
+    if(d.split) sh+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
+    sh+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
+    sh+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
     d.food.forEach(function(f){
-      h+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
-      if(f[1]) h+=' <span class="food-stars">&#11088; '+f[1]+'</span>';
-      if(f[2]) h+=' <span style="color:#5f6368">'+f[2]+'</span>';
-      if(f[3]) h+=' <a href="'+f[3]+'" target="_blank">Maps</a>';
-      h+="</div>";
+      sh+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
+      if(f[1]) sh+=' <span class="food-stars">&#11088; '+f[1]+'</span>';
+      if(f[2]) sh+=' <span style="color:#5f6368">'+f[2]+'</span>';
+      if(f[3]) sh+=' <a href="'+f[3]+'" target="_blank">Maps</a>';
+      sh+="</div>";
     });
-    h+="</div>";
-    h+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
-    d.tips.forEach(function(t){h+="<li>"+t+"</li>";});
-    h+="</ul></div>";
-    h+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
+    sh+="</div>";
+    sh+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
+    d.tips.forEach(function(t){sh+="<li>"+t+"</li>";});
+    sh+="</ul></div>";
+    sh+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
     if(d.nocleg){
       var nCity=d.nocleg.split(' \u00b7 ')[0];
-      h+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
+      sh+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
     }
-    h+='</div>'; // close .det
-    // Nav arrows
-    h+='<div class="day-arrows">';
-    if(ad>0) h+='<div class="day-arrow day-arrow-prev" onclick="sel('+(ad-1)+')">&larr; Dzie\u0144 '+days[ad-1].num+' &middot; '+days[ad-1].title+'</div>';
-    else h+='<div class="day-arrow"></div>';
-    if(ad<days.length-1) h+='<div class="day-arrow day-arrow-next" onclick="sel('+(ad+1)+')">Dzie\u0144 '+days[ad+1].num+' &middot; '+days[ad+1].title+' &rarr;</div>';
-    else h+='<div class="day-arrow"></div>';
-    h+='</div>';
-    h+='</div>'; // close .dc
+    sh+='</div>';
+    sh+='<div class="day-arrows">';
+    if(ad>0) sh+='<div class="day-arrow day-arrow-prev" onclick="sel('+(ad-1)+')">&larr; Dzie\u0144 '+days[ad-1].num+' &middot; '+days[ad-1].title+'</div>';
+    else sh+='<div class="day-arrow"></div>';
+    if(ad<days.length-1) sh+='<div class="day-arrow day-arrow-next" onclick="sel('+(ad+1)+')">Dzie\u0144 '+days[ad+1].num+' &middot; '+days[ad+1].title+' &rarr;</div>';
+    else sh+='<div class="day-arrow"></div>';
+    sh+='</div>';
+    sh+='</div>';
+    bsEl.innerHTML=sh;
+    document.getElementById("daysList").innerHTML='';
   } else {
-    // Desktop: existing list+accordion
+    // Desktop: day-nav + accordion list
+    h+='<div class="day-nav">';
+    days.forEach(function(d,i){
+      var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+      h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+    });
+    h+='</div>';
     days.forEach(function(d,i){
       var cls="dc"+(d.easter?" easter-bg":"")+(ad===i?" on":"");
       h+='<div class="'+cls+'" onclick="sel('+i+')">';
@@ -194,8 +196,8 @@ function render(){
       }
       h+="</div></div>";
     });
+    document.getElementById("daysList").innerHTML=h;
   }
-  document.getElementById("daysList").innerHTML=h;
 }
 
 function sel(i){
