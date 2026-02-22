@@ -138,7 +138,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   #map{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh!important;width:100vw!important;margin:0;z-index:1}
 
   /* === BOTTOM BAR (fixed at bottom) === */
-  .bottom-bar{display:flex;position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;border-top:1px solid #dadce0;z-index:1100;align-items:center;padding:0 8px;gap:4px;box-shadow:0 -2px 8px rgba(0,0,0,.1)}
+  .bottom-bar{display:flex;position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;border-top:1px solid #dadce0;z-index:1100;align-items:center;padding:0 8px;gap:4px;box-shadow:0 -2px 8px rgba(0,0,0,.1);padding-bottom:env(safe-area-inset-bottom)}
   .bottom-bar button{width:36px;height:36px;border-radius:50%;border:2px solid #dadce0;background:#fff;cursor:pointer;font-size:13px;font-weight:700;color:#5f6368;transition:all .15s;flex-shrink:0;padding:0}
   .bottom-bar button:hover{background:#f1f3f4}
   .bottom-bar button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
@@ -147,7 +147,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .bottom-bar .bb-hamburger{width:40px;height:40px;border:none;border-radius:50%;background:#f1f3f4;font-size:20px;color:#5f6368;margin-left:auto;cursor:pointer;display:flex;align-items:center;justify-content:center}
 
   /* === BOTTOM SHEET === */
-  .bottom-sheet{display:block;position:fixed;left:0;right:0;bottom:56px;z-index:1050;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.15);will-change:transform;transition:height .3s cubic-bezier(.4,0,.2,1);overflow:hidden}
+  .bottom-sheet{display:block;position:fixed;left:0;right:0;bottom:calc(56px + env(safe-area-inset-bottom));z-index:1050;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 20px rgba(0,0,0,.15);will-change:transform;transition:height .3s cubic-bezier(.4,0,.2,1);overflow:hidden}
   .bs-handle{padding:10px 0 6px;cursor:grab;touch-action:none;display:flex;justify-content:center}
   .bs-handle-bar{width:36px;height:4px;border-radius:2px;background:#dadce0}
   .bs-content{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
@@ -185,8 +185,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .bs-content .budget-inner th{font-size:11px;padding:6px 8px}
 
   /* === MAP ADJUSTMENTS === */
-  .map-filter-btn{display:flex!important;bottom:126px}
-  .map-filter-overlay{bottom:180px}
+  .map-filter-btn{display:flex!important;bottom:calc(35vh + 80px)}
+  .map-filter-overlay{bottom:calc(35vh + 134px)}
   .map-day-bar{display:none!important}
   .map-back-btn{display:none!important}
 

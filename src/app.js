@@ -785,3 +785,10 @@ renderAnkieta();
 renderMapDayBar();
 renderBottomBar();
 if(window.innerWidth<=768) initSheetGestures();
+if(window.innerWidth<=768 && ad!==null){
+  var initDays=getDays(),initD=initDays[ad],initBounds=[];
+  initD.points.forEach(function(pid){if(markers[pid])initBounds.push(markers[pid].m.getLatLng());});
+  if(initBounds.length>1)map.fitBounds(initBounds,{padding:[50,50],maxZoom:11});
+  else if(initBounds.length===1)map.setView(initBounds[0],11);
+  setTimeout(function(){highlightDayMarkers(initD.points);},100);
+}
