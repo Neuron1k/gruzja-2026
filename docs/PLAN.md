@@ -59,6 +59,7 @@
 
 **Program:**
 - Przejazd Kutaisi – Tbilisi (3h)
+- Mtskheta po drodze: Svetitskhoveli + Jvari (UNESCO!)
 - Stare Miasto: Abanotubani, Most Pokoju
 - Narikala — kolejka linowa z Rike Park!
 - Wieczór: łaźnie siarkowe (prywatna sala!)
@@ -68,6 +69,7 @@
 - **Shavi Lomi** ⭐ 4.5 (2k) — Nowoczesna gruzińska, ogród z kotami. Rezerwuj ogród!
 
 **Tips:**
+- Mtskheta leży dokładnie na trasie Kutaisi-Tbilisi! Svetitskhoveli + Jvari: UNESCO, darmowe, 30-45 min
 - Narikala: kolejka z Rike Park 2.5 GEL/os, 2 min na górę. Dzieci kochają!
 - Łaźnie siarkowe: Royal Bath House ⭐ 4.5 polecane. Prywatna sala ~70 GEL/h (4-6 osób, potrzeba 2 sal!)
 - UWAGA: gorąca siarka może być za intensywna dla dzieci 3+5 lat — dorośli wieczorem, opieka na zmianę
@@ -86,6 +88,7 @@
 - Kościół: Sameba lub Sioni
 - Mtatsminda Park — funicular + karuzele + widoki
 - Dry Bridge Market — antyki, rękodzieł, pamiątki
+- Kronika Gruzji — darmowe, wow-efekt! (~15 min taxi)
 - Opcja: Zoo / Contact Zoo Faunaland
 - Kolacja: supra (tradycyjna uczta UNESCO!)
 
@@ -102,7 +105,6 @@
 - Suprę zamów wcześniej: supradinner.com
 - Gruzini też malują czerwone jajka!
 - Jejili = trawka wielkanocna z pszenicą — kup na targu!
-- Opcja: Kronika Gruzji (⭐ 4.8, darmowe, wow-efekt na zdjęciach, ~15 min taxi)
 
 > 🏠 **Nocleg:** Tbilisi · Apartament w starym Tbilisi (Airbnb)
 
@@ -123,19 +125,17 @@
 - Sighnaghi: 2-3h spaceru po murach + kolacja. Perełka!
 - Guest House Vista: wycieczka po winnicy 20 GEL/os
 - Sighnaghi z dziećmi OK! Mury + wino + spokojny wieczór
-- Mtskheta (UNESCO) robimy **jutro po drodze powrotnej** — leży na trasie!
+- Mtskheta (UNESCO) już zaliczona w dniu 3 — luźny powrót!
 
 > 🏠 **Nocleg:** Sighnaghi · Guest House Vista (zarezerwowane, free cancel!)
 
 ---
 
-### Dzień 6 — Wt 7.04 · Powrót + Mtskheta + Cooking class · (~2.5h jazdy)
+### Dzień 6 — Wt 7.04 · Powrót + Cooking class · (~2h jazdy)
 
 **Program:**
 - Poranek w Sighnaghi → wyjazd ~10:00
-- Opcja: Khareba Winery po drodze (30 min od Sighnaghi) — tunel wina 7.7 km w skale! Plac zabaw + lody
-- **Mtskheta po drodze** (~2h od Sighnaghi): Svetitskhoveli + Jvari Monastery (UNESCO!)
-- Przyjazd do Tbilisi ~14:00
+- Przyjazd do Tbilisi ~13:00
 - Cooking class: khinkali + khachapuri! 🥟
 - Kolacja: to co ugotowaliście!
 
@@ -146,10 +146,7 @@
 **Tips:**
 - Cooking class: MUST-DO! 20–50 EUR/os. Zarezerwuj wcześniej, family-friendly!
 - Dzieci kochają lepienie khinkali!
-- Svetitskhoveli + Jvari: UNESCO, darmowe, 30-45 min. Jvari = widoki na zbieg rzek!
-- Sighnaghi → Mtskheta → Tbilisi: naturalny szlak powrotny, Mtskheta leży po drodze!
-- Khareba: tunel robi wrażenie ale degustacja masowa. Plac zabaw + lody = klucz z dziećmi
-- Lekkie popołudnie po intensywnym dniu 5
+- Luźny dzień — Mtskheta już zaliczona w dniu 3!
 
 > 🏠 **Nocleg:** Tbilisi · Apartament w starym Tbilisi (Airbnb)
 
