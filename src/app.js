@@ -211,47 +211,78 @@ function renderBudget(){
 }
 
 // === PAKOWANIE ===
+var PACK_ITEMS=[
+  {cat:"\ud83d\udc55 Ubrania"},
+  {text:"Kurtka przeciwdeszczowa (kwiecie\u0144 = kapry\u015bny!)",imp:true},
+  {text:"Polar / bluza na wieczory (g\u00f3ry ch\u0142odne)"},
+  {text:"Wygodne buty do chodzenia (du\u017co bruku!)"},
+  {text:"Sanda\u0142y / klapki (\u0142a\u017anie siarkowe)"},
+  {text:"Koszulki, spodnie na ~20\u00b0C dzie\u0144 / ~8\u00b0C noc"},
+  {text:"Czapka z daszkiem / okulary"},
+  {cat:"\ud83d\udc76 Dla ch\u0142opc\u00f3w (3 i 5 lat)"},
+  {text:"Przek\u0105ski na drog\u0119 (du\u017co!)"},
+  {text:"Lekki w\u00f3zek spacerowy (opcja)"},
+  {text:"Bluzy zapasowe (khinkali = ba\u0142agan)"},
+  {cat:"\ud83d\udcc4 Dokumenty"},
+  {text:"Paszport (min. 6 mies. wa\u017cno\u015bci!)",imp:true},
+  {text:"Revolut / karta wielowalutowa (GEL!)",imp:true},
+  {text:"Ubezpieczenie podr\u00f3\u017cne + EKUZ"},
+  {text:"Wydruk rezerwacji (hotel, auto, loty)"},
+  {text:"Prawo jazdy (kat. B wystarczy)"},
+  {cat:"\ud83d\udc8a Apteczka"},
+  {text:"Ibuprofen / paracetamol"},
+  {text:"Leki na biegunk\u0119 (zmiana kuchni!)"},
+  {text:"Plastry, \u015brodek odka\u017caj\u0105cy"},
+  {text:"Krem z filtrem SPF30+"},
+  {text:"\u015arodek na komary (wieczory nad rzek\u0105)"},
+  {cat:"\ud83d\ude97 W aucie"},
+  {text:"Foteliki \u2014 NA MIEJSCU (CheckInKutaisi: gratis!)"},
+  {text:"Nawigacja offline (Maps.me lub Google Maps)"},
+  {text:"\u0141adowarka USB / powerbank"},
+  {text:"Woda, chusteczki mokre"},
+  {cat:"\ud83d\udcf1 Technika"},
+  {text:"SIM / eSIM (Magti/Geocell na lotnisku, ~\u20ac5)"},
+  {text:"Powerbank"}
+];
+
+function getPackState(){
+  try{return JSON.parse(localStorage.getItem("gruzja-packing"))||{};}catch(e){return {};}
+}
+function savePackState(s){
+  try{localStorage.setItem("gruzja-packing",JSON.stringify(s));}catch(e){}
+}
+function togglePack(idx){
+  var s=getPackState();
+  if(s[idx]) delete s[idx]; else s[idx]=true;
+  savePackState(s);
+  renderPacking();
+}
+function resetPacking(){
+  try{localStorage.removeItem("gruzja-packing");}catch(e){}
+  renderPacking();
+}
+
 function renderPacking(){
   var el=document.getElementById("packingPanel");
-  el.innerHTML=
-    '<div class="pack-cat">\ud83d\udc55 Ubrania</div>'+
-    '<div class="pack-item important">Kurtka przeciwdeszczowa (kwiecie\u0144 = kapry\u015bny!)</div>'+
-    '<div class="pack-item">Polar / bluza na wieczory (g\u00f3ry ch\u0142odne)</div>'+
-    '<div class="pack-item">Wygodne buty do chodzenia (du\u017co bruku!)</div>'+
-    '<div class="pack-item">Sanda\u0142y / klapki (\u0142a\u017anie siarkowe)</div>'+
-    '<div class="pack-item">Koszulki, spodnie na ~20\u00b0C dzie\u0144 / ~8\u00b0C noc</div>'+
-    '<div class="pack-item">Czapka z daszkiem / okulary</div>'+
-
-    '<div class="pack-cat">\ud83d\udc76 Dla ch\u0142opc\u00f3w (3 i 5 lat)</div>'+
-    '<div class="pack-item">Przek\u0105ski na drog\u0119 (du\u017co!)</div>'+
-    '<div class="pack-item">Lekki w\u00f3zek spacerowy (opcja)</div>'+
-    '<div class="pack-item">Bluzy zapasowe (khinkali = ba\u0142agan)</div>'+
-
-    '<div class="pack-cat">\ud83d\udcc4 Dokumenty</div>'+
-    '<div class="pack-item important">Paszport (min. 6 mies. wa\u017cno\u015bci!)</div>'+
-    '<div class="pack-item important">Revolut / karta wielowalutowa (GEL!)</div>'+
-    '<div class="pack-item">Ubezpieczenie podr\u00f3\u017cne + EKUZ</div>'+
-    '<div class="pack-item">Wydruk rezerwacji (hotel, auto, loty)</div>'+
-    '<div class="pack-item">Prawo jazdy (kat. B wystarczy)</div>'+
-
-    '<div class="pack-cat">\ud83d\udc8a Apteczka</div>'+
-    '<div class="pack-item">Ibuprofen / paracetamol</div>'+
-    '<div class="pack-item">Leki na biegunk\u0119 (zmiana kuchni!)</div>'+
-    '<div class="pack-item">Plastry, \u015brodek odka\u017caj\u0105cy</div>'+
-    '<div class="pack-item">Krem z filtrem SPF30+</div>'+
-    '<div class="pack-item">\u015arodek na komary (wieczory nad rzek\u0105)</div>'+
-
-    '<div class="pack-cat">\ud83d\ude97 W aucie</div>'+
-    '<div class="pack-item">Foteliki \u2014 NA MIEJSCU (CheckInKutaisi: gratis!)</div>'+
-    '<div class="pack-item">Nawigacja offline (Maps.me lub Google Maps)</div>'+
-    '<div class="pack-item">\u0141adowarka USB / powerbank</div>'+
-    '<div class="pack-item">Woda, chusteczki mokre</div>'+
-
-    '<div class="pack-cat">\ud83d\udcf1 Technika</div>'+
-    '<div class="pack-item">SIM / eSIM (Magti/Geocell na lotnisku, ~\u20ac5)</div>'+
-    '<div class="pack-item">Powerbank</div>'+
-
-    '<div class="note" style="margin-top:12px">\ud83d\udd0c Adapter gniazdka NIE jest potrzebny \u2014 Gruzja ma takie same gniazdka jak Polska (typ C/F).</div>';
+  var state=getPackState();
+  var total=0,checked=0;
+  PACK_ITEMS.forEach(function(p,i){
+    if(p.text){total++;if(state[i])checked++;}
+  });
+  var pct=total>0?Math.round(checked/total*100):0;
+  var h='<div class="pack-progress">Spakowano: <strong>'+checked+'/'+total+'</strong>';
+  h+='<div class="pack-progress-bar"><div class="pack-progress-fill" style="width:'+pct+'%"></div></div></div>';
+  PACK_ITEMS.forEach(function(p,i){
+    if(p.cat){
+      h+='<div class="pack-cat">'+p.cat+'</div>';
+    }else{
+      var cls='pack-item'+(p.imp?' important':'')+(state[i]?' checked':'');
+      h+='<div class="'+cls+'" onclick="togglePack('+i+')">'+p.text+'</div>';
+    }
+  });
+  h+='<div class="note" style="margin-top:12px">\ud83d\udd0c Adapter gniazdka NIE jest potrzebny \u2014 Gruzja ma takie same gniazdka jak Polska (typ C/F).</div>';
+  h+='<button class="pack-reset" onclick="resetPacking()">\u21bb Resetuj pakowanie</button>';
+  el.innerHTML=h;
 }
 
 // === NOCLEGI ===
