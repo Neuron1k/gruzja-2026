@@ -10,6 +10,11 @@
 </head>
 <body>
 <div class="mobile-nav"><button class="hamburger" onclick="toggleDrawer()">☰</button><button id="btn-list" class="active" onclick="mobileView('list')">📋 Lista</button><button id="btn-map" onclick="mobileView('map')">🗺️ Mapa</button></div>
+<div class="bottom-sheet" id="bottomSheet">
+<div class="bs-handle" id="bsHandle"><div class="bs-handle-bar"></div></div>
+<div class="bs-content" id="bsContent"></div>
+</div>
+<div class="bottom-bar" id="bottomBar"></div>
 <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
 <div class="drawer" id="drawer">
 <div class="drawer-head">
@@ -71,8 +76,6 @@
 <div id="map"></div>
 <button class="map-filter-btn" onclick="toggleMapFilters()" title="Filtry">🔍</button>
 <div class="map-filter-overlay" id="mapFilterOverlay"></div>
-<button class="map-back-btn" id="mapBackBtn" onclick="mobileView('list');hideBackBtn()">&larr; Wroc do listy</button>
-<div class="map-day-bar" id="mapDayBar"></div>
 
 <script src="src/data/attractions.js"></script>
 <script src="src/data/days.js"></script>
