@@ -181,6 +181,7 @@ function sel(i){
   if(window.innerWidth<=768) ad=i;
   else ad=ad===i?null:i;
   render();
+  renderMapDayBar();
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
     if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
@@ -511,6 +512,18 @@ function highlightDayMarkers(dayPoints){
   });
 }
 
+// === MAP DAY BAR ===
+function renderMapDayBar(){
+  var bar=document.getElementById('mapDayBar');
+  if(!bar) return;
+  var days=getDays(),h='';
+  days.forEach(function(d,i){
+    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+  });
+  bar.innerHTML=h;
+}
+
 // === MOBILE VIEW ===
 function mobileView(v){
   var b=document.body;
@@ -519,6 +532,7 @@ function mobileView(v){
     document.getElementById('btn-map').classList.add('active');
     document.getElementById('btn-list').classList.remove('active');
     setTimeout(function(){if(typeof map!=='undefined')map.invalidateSize();},150);
+    renderMapDayBar();
   }else{
     b.classList.add('m-list');b.classList.remove('m-map');
     document.getElementById('btn-list').classList.add('active');
@@ -567,3 +581,4 @@ renderBudget();
 renderPacking();
 renderNoclegi();
 renderAnkieta();
+renderMapDayBar();
