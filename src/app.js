@@ -19,11 +19,11 @@ ATTR.forEach(function(a){
   var pop='<span class="pop-badge" style="background:'+(a.color==="#1a73e8"?"#e8f0fe":a.color==="#9c27b0"?"#f3e8fd":a.color==="#34a853"?"#e6f4ea":a.color==="#f9ab00"?"#fef7e0":a.color==="#ff7043"?"#fff3e0":"#f1f3f4")+';color:'+(a.color==="#1a73e8"?"#1967d2":a.color==="#fff"?"#5f6368":a.color)+'">' +a.cat+'</span><b>'+a.name+'</b>';
   if(a.rating) pop+='<div class="pop-r">&#11088; '+a.rating+'/5 ('+a.reviews+' reviews)</div>';
   pop+=a.desc;
-  pop+='<br><a class="pop-link" href="'+a.gmap+'" target="_blank">&#128205; Otworz w Google Maps</a>';
-  if(a.georgiaTo) pop+='<br><a class="pop-link pop-link-gt" href="'+a.georgiaTo+'" target="_blank">&#127468;&#127466; Wiecej na georgia.to &rarr;</a>';
+  pop+='<a class="pop-link" href="'+a.gmap+'" target="_blank">&#128205; Otworz w Google Maps</a>';
+  if(a.georgiaTo) pop+='<a class="pop-link pop-link-gt" href="'+a.georgiaTo+'" target="_blank">&#127468;&#127466; Wiecej na georgia.to &rarr;</a>';
   if(attrToDays[a.id]){
     attrToDays[a.id].forEach(function(di){
-      pop+='<br><span class="pop-day-link" onclick="goToDay('+di+')">\ud83d\udcc5 Dzie\u0144 '+(di+1)+'</span>';
+      pop+='<span class="pop-day-link" onclick="goToDay('+di+')">\ud83d\udcc5 Dzie\u0144 '+(di+1)+'</span>';
     });
   }
   var m=L.marker([a.lat,a.lng],{icon:mkI(a.color,a.sz)});
