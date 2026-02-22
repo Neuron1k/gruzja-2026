@@ -105,6 +105,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .day-nav button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
 .day-nav button.dn-easter{border-color:#ea4335}
 .day-nav button.dn-easter.dn-on{background:#ea4335;border-color:#ea4335}
+.map-back-btn{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:1600;padding:10px 20px;background:#fff;border:2px solid #1a73e8;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.25);cursor:pointer;font-size:13px;font-weight:600;color:#1a73e8;white-space:nowrap;transition:all .2s}
+.map-back-btn:hover{background:#e8f0fe}
+.map-back-btn.show{display:block}
+.day-map-cta{margin-top:6px;padding:8px;background:#e8f0fe;border-radius:6px;text-align:center;cursor:pointer;font-size:11px;font-weight:600;color:#1a73e8;transition:background .12s}
+.day-map-cta:hover{background:#d2e3fc}
+.pop-day-link{display:inline-block;margin-top:4px;padding:3px 8px;background:#e8f0fe;border-radius:10px;color:#1a73e8;text-decoration:none;font-size:10px;font-weight:600;cursor:pointer}
+.pop-day-link:hover{background:#d2e3fc}
 @media(max-width:768px){
   .mobile-nav{display:flex;height:50px}
   .mobile-nav button{font-size:14px}
@@ -148,6 +155,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .day-nav{gap:6px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .day-nav::-webkit-scrollbar{display:none}
   .day-nav button{width:36px;height:36px;font-size:13px}
+  .day-map-cta{font-size:13px;padding:12px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  .pop-day-link{font-size:12px;padding:5px 10px;min-height:36px;display:inline-flex;align-items:center}
 }
 .acc-section{margin-bottom:16px}
 .acc-section h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:600;color:#e91e63;margin:10px 0 6px}

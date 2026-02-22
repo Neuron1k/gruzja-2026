@@ -5,6 +5,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"O
 
 function mkI(c,s){return L.divIcon({html:'<div class="cm" style="background:'+c+';width:'+s+'px;height:'+s+'px"></div>',iconSize:[s,s],iconAnchor:[s/2,s/2],className:""});}
 
+// === ATTRACTION → DAY LOOKUP ===
+var attrToDays={};
+DAYS_A.forEach(function(d,i){
+  d.points.forEach(function(pid){
+    if(!attrToDays[pid]) attrToDays[pid]=[];
+    attrToDays[pid].push(i);
+  });
+});
+
 var markers={};
 ATTR.forEach(function(a){
   var pop='<span class="pop-badge" style="background:'+(a.color==="#1a73e8"?"#e8f0fe":a.color==="#9c27b0"?"#f3e8fd":a.color==="#34a853"?"#e6f4ea":a.color==="#f9ab00"?"#fef7e0":a.color==="#ff7043"?"#fff3e0":"#f1f3f4")+';color:'+(a.color==="#1a73e8"?"#1967d2":a.color==="#fff"?"#5f6368":a.color)+'">' +a.cat+'</span><b>'+a.name+'</b>';
@@ -12,6 +21,11 @@ ATTR.forEach(function(a){
   pop+=a.desc;
   pop+='<br><a class="pop-link" href="'+a.gmap+'" target="_blank">&#128205; Otworz w Google Maps</a>';
   if(a.georgiaTo) pop+='<br><a class="pop-link pop-link-gt" href="'+a.georgiaTo+'" target="_blank">&#127468;&#127466; Wiecej na georgia.to &rarr;</a>';
+  if(attrToDays[a.id]){
+    attrToDays[a.id].forEach(function(di){
+      pop+='<br><span class="pop-day-link" onclick="goToDay('+di+')">\ud83d\udcc5 Dzie\u0144 '+(di+1)+'</span>';
+    });
+  }
   var m=L.marker([a.lat,a.lng],{icon:mkI(a.color,a.sz)});
   m.addTo(map);
   m.bindPopup(pop,{maxWidth:260});
@@ -103,6 +117,7 @@ function render(){
     h+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
     d.tips.forEach(function(t){h+="<li>"+t+"</li>";});
     h+="</ul></div>";
+    h+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
     if(d.nocleg){
       var nCity=d.nocleg.split(' \u00b7 ')[0];
       h+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
@@ -146,14 +161,42 @@ function toggleExtras(){
   }
 }
 
+var backBtnTimer=null;
+function showBackBtn(){
+  var btn=document.getElementById('mapBackBtn');
+  if(btn){btn.classList.add('show');clearTimeout(backBtnTimer);backBtnTimer=setTimeout(hideBackBtn,5000);}
+}
+function hideBackBtn(){
+  var btn=document.getElementById('mapBackBtn');
+  if(btn)btn.classList.remove('show');
+  clearTimeout(backBtnTimer);
+}
+
 function flyTo(id){
   if(markers[id]){
     var m=markers[id].m;
     if(!map.hasLayer(m))m.addTo(map);
-    if(window.innerWidth<=768)mobileView('map');
+    if(window.innerWidth<=768){mobileView('map');showBackBtn();}
     map.setView(m.getLatLng(),12);
     setTimeout(function(){m.openPopup();},200);
   }
+}
+
+function goToDay(i){
+  if(window.innerWidth<=768) mobileView('list');
+  ad=i;
+  render();
+  var card=document.querySelectorAll('.dc')[i];
+  if(card) card.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showDayOnMap(i){
+  var days=getDays(),d=days[i],bounds=[];
+  d.points.forEach(function(pid){if(markers[pid])bounds.push(markers[pid].m.getLatLng());});
+  if(window.innerWidth<=768){mobileView('map');showBackBtn();}
+  if(bounds.length>1)map.fitBounds(bounds,{padding:[50,50],maxZoom:12});
+  else if(bounds.length===1)map.setView(bounds[0],12);
+  highlightDayMarkers(d.points);
 }
 
 function goToNocleg(city){
