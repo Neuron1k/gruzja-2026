@@ -105,7 +105,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .day-nav button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
 .day-nav button.dn-easter{border-color:#ea4335}
 .day-nav button.dn-easter.dn-on{background:#ea4335;border-color:#ea4335}
-.map-back-btn{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:1600;padding:10px 20px;background:#fff;border:2px solid #1a73e8;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.25);cursor:pointer;font-size:13px;font-weight:600;color:#1a73e8;white-space:nowrap;transition:all .2s}
+.map-back-btn{display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:1600;padding:10px 20px;background:#fff;border:2px solid #1a73e8;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.25);cursor:pointer;font-size:13px;font-weight:600;color:#1a73e8;white-space:nowrap;transition:all .2s}
 .map-back-btn:hover{background:#e8f0fe}
 .map-back-btn.show{display:block}
 .day-map-cta{margin-top:6px;padding:8px;background:#e8f0fe;border-radius:6px;text-align:center;cursor:pointer;font-size:11px;font-weight:600;color:#1a73e8;transition:background .12s}
@@ -125,7 +125,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   body.m-map .panel{display:none}
   body.m-list #map{display:none}
   body.m-map .map-filter-btn{display:flex}
-  body.m-map .map-day-bar{display:flex}
+  .map-day-bar{display:flex!important}
   .dc{padding:14px 16px}
   .dd{font-size:13px}
   .dt{font-size:12px}
@@ -157,6 +157,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .acc-detail{font-size:11px}
   .acc-price{font-size:12px}
   .acc-links a{font-size:12px;min-height:40px;display:inline-flex;align-items:center}
+  .scroll{padding-bottom:60px}
   .day-nav{gap:6px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .day-nav::-webkit-scrollbar{display:none}
   .day-nav button{width:36px;height:36px;font-size:13px}
@@ -198,12 +199,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .survey-error{text-align:center;padding:20px;color:#ea4335;font-size:11px}
 .leg-i.off{opacity:.35;text-decoration:line-through}
 .leg-i.off .leg-d{opacity:.3}
-.map-filter-btn{display:none;position:fixed;bottom:20px;right:16px;z-index:1500;width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid #dadce0;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer;font-size:20px;align-items:center;justify-content:center;transition:all .2s}
+.map-filter-btn{display:none;position:fixed;bottom:70px;right:16px;z-index:1500;width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid #dadce0;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer;font-size:20px;align-items:center;justify-content:center;transition:all .2s}
 .map-filter-btn:hover{background:#f1f3f4;transform:scale(1.05)}
-.map-filter-overlay{display:none;position:fixed;bottom:124px;right:16px;z-index:1500;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.25);padding:12px 14px;max-width:220px}
+.map-filter-overlay{display:none;position:fixed;bottom:124px;right:16px;z-index:1600;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.25);padding:12px 14px;max-width:220px}
 .map-filter-overlay.show{display:block}
 .map-filter-overlay .leg-i{display:flex;align-items:center;gap:5px;padding:6px 0;font-size:12px}
-.map-day-bar{display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);z-index:1500;background:#fff;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.25);padding:6px 10px;gap:6px;align-items:center}
+.map-day-bar{display:none;position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:1500;background:#fff;border-radius:24px;box-shadow:0 2px 12px rgba(0,0,0,.25);padding:6px 10px;gap:6px;align-items:center}
 .map-day-bar button{width:34px;height:34px;border-radius:50%;border:2px solid #dadce0;background:#fff;cursor:pointer;font-size:12px;font-weight:700;color:#5f6368;transition:all .15s;padding:0;flex-shrink:0}
 .map-day-bar button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
 .map-day-bar button.dn-easter{border-color:#ea4335}
