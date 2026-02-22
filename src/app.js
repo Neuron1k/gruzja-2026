@@ -585,6 +585,23 @@ window.addEventListener('resize',function(){
   },{passive:true});
 })();
 
+// === DRAWER ===
+function toggleDrawer(){
+  document.getElementById('drawer').classList.toggle('open');
+  document.getElementById('drawerOverlay').classList.toggle('open');
+}
+function drawerTab(tab){
+  toggleDrawer();
+  var btn=document.querySelector('.main-tabs button');
+  document.querySelectorAll('.main-tabs button').forEach(function(b){
+    b.classList.remove('on');
+    if((tab==='plan'&&b.textContent.indexOf('Plan')!==-1)||(tab==='noclegi'&&b.textContent.indexOf('Noclegi')!==-1)||(tab==='budget'&&b.textContent.indexOf('Bud')!==-1)||(tab==='packing'&&b.textContent.indexOf('Pakowanie')!==-1)||(tab==='ankieta'&&b.textContent.indexOf('Ankieta')!==-1)){
+      b.classList.add('on');btn=b;
+    }
+  });
+  mainTab(tab,btn);
+}
+
 // === INIT ===
 if(window.innerWidth<=768) ad=0;
 render();
