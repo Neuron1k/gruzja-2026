@@ -279,6 +279,22 @@ function showDayOnMap(i){
 }
 
 function goToNocleg(city){
+  if(window.innerWidth<=768){
+    drawerTab('noclegi');
+    setTimeout(function(){
+      var headers=document.querySelectorAll('#noclegiPanel h4');
+      var parts=city.split(/ lub | \/ /);
+      for(var i=0;i<headers.length;i++){
+        for(var p=0;p<parts.length;p++){
+          if(headers[i].textContent.indexOf(parts[p].trim())!==-1){
+            headers[i].scrollIntoView({behavior:'smooth',block:'start'});
+            return;
+          }
+        }
+      }
+    },100);
+    return;
+  }
   var btn=document.querySelector('.main-tabs button:nth-child(2)');
   mainTab('noclegi',btn);
   setTimeout(function(){
@@ -733,6 +749,22 @@ function toggleDrawer(){
 }
 function drawerTab(tab){
   toggleDrawer();
+  if(window.innerWidth<=768){
+    var bsEl=document.getElementById('bsContent');
+    if(!bsEl) return;
+    if(tab==='plan'){
+      render();
+      renderBottomBar();
+      setSheetSnap(SNAP_PEEK);
+      return;
+    }
+    if(tab==='budget'){bsEl.innerHTML='<div class="budget-inner" id="budgetPanel"></div>';renderBudget();}
+    else if(tab==='packing'){bsEl.innerHTML='<div class="budget-inner" id="packingPanel"></div>';renderPacking();}
+    else if(tab==='noclegi'){bsEl.innerHTML='<div class="budget-inner" id="noclegiPanel"></div>';renderNoclegi();}
+    else if(tab==='ankieta'){bsEl.innerHTML='<div class="budget-inner" id="ankietaPanel"></div>';renderAnkieta();}
+    setSheetSnap(SNAP_FULL);
+    return;
+  }
   var btn=document.querySelector('.main-tabs button');
   document.querySelectorAll('.main-tabs button').forEach(function(b){
     b.classList.remove('on');
