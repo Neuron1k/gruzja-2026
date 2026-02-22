@@ -71,15 +71,16 @@ function render(){
     h+='<div class="'+cls+'" onclick="sel('+i+')">';
     h+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
     h+='<div class="dt">'+d.title+'</div>';
-    h+='<div class="dr">&#128663; '+d.drive+(d.nocleg?' &nbsp;|&nbsp; \ud83c\udfe0 '+d.nocleg:'')+'</div>';
+    var cityOnly=d.nocleg?d.nocleg.split(' \u00b7 ')[0]:null;
+    h+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
     h+='<div class="det'+(ad===i?" show":"")+'">';
+    if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
     h+='<div class="ds prog"><h4>&#128205; Program</h4><ul>';
     d.program.forEach(function(p){
       if(p==="---") h+='<li class="sep"></li>';
       else h+="<li>"+p+"</li>";
     });
     h+="</ul></div>";
-    if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
     h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
     d.food.forEach(function(f){
       h+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
@@ -92,7 +93,10 @@ function render(){
     h+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
     d.tips.forEach(function(t){h+="<li>"+t+"</li>";});
     h+="</ul></div>";
-    if(d.nocleg) h+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
+    if(d.nocleg){
+      var nCity=d.nocleg.split(' \u00b7 ')[0];
+      h+='<div class="ds" style="background:#e8f5e9;border:1px solid #c8e6c9;text-align:center;font-weight:600;color:#2e7d32;cursor:pointer" onclick="event.stopPropagation();goToNocleg(\''+nCity.replace(/'/g,"\\'")+'\')">\ud83c\udfe0 Nocleg: '+d.nocleg+'</div>';
+    }
     h+="</div></div>";
   });
   document.getElementById("daysList").innerHTML=h;
@@ -137,6 +141,23 @@ function flyTo(id){
     map.setView(m.getLatLng(),12);
     m.openPopup();
   }
+}
+
+function goToNocleg(city){
+  var btn=document.querySelector('.main-tabs button:nth-child(2)');
+  mainTab('noclegi',btn);
+  setTimeout(function(){
+    var headers=document.querySelectorAll('#noclegiPanel h4');
+    var parts=city.split(/ lub | \/ /);
+    for(var i=0;i<headers.length;i++){
+      for(var p=0;p<parts.length;p++){
+        if(headers[i].textContent.indexOf(parts[p].trim())!==-1){
+          headers[i].scrollIntoView({behavior:'smooth',block:'start'});
+          return;
+        }
+      }
+    }
+  },50);
 }
 
 // === BUDŻET ===
