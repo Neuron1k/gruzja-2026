@@ -122,7 +122,10 @@ function render(){
   var bsEl = document.getElementById('bsContent');
   if(isMobile && bsEl){
     // Mobile: render into bottom sheet
-    if(ad===null) ad=0;
+    if(ad===null){
+      bsEl.innerHTML='';
+      document.getElementById("daysList").innerHTML='';
+    } else {
     var d=days[ad], i=ad;
     var sh='<div class="dc on'+(d.easter?' easter-bg':'')+'">';
     sh+='<div class="dh"><div class="dn">'+d.num+'</div><div class="dd">'+d.date+'</div></div>';
@@ -159,6 +162,7 @@ function render(){
     sh+='</div>';
     bsEl.innerHTML=sh;
     document.getElementById("daysList").innerHTML='';
+    }
   } else {
     // Desktop: day-nav + accordion list
     h+='<div class="day-nav">';
@@ -201,13 +205,12 @@ function render(){
 }
 
 function sel(i){
-  if(window.innerWidth<=768) ad=i;
-  else ad=ad===i?null:i;
+  ad=ad===i?null:i;
   render();
   renderMapDayBar();
   if(window.innerWidth<=768){
     renderBottomBar();
-    setSheetSnap(SNAP_PEEK);
+    setSheetSnap(ad!==null?SNAP_PEEK:SNAP_MIN);
   }
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
@@ -219,6 +222,7 @@ function sel(i){
     setTimeout(function(){highlightDayMarkers(d.points);},100);
   }else{
     highlightDayMarkers(null);
+    map.setView([42.0,44.0],8);
   }
 }
 
