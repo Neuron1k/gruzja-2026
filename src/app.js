@@ -11,6 +11,7 @@ ATTR.forEach(function(a){
   if(a.rating) pop+='<div class="pop-r">&#11088; '+a.rating+'/5 ('+a.reviews+' reviews)</div>';
   pop+=a.desc;
   pop+='<br><a class="pop-link" href="'+a.gmap+'" target="_blank">&#128205; Otworz w Google Maps</a>';
+  if(a.georgiaTo) pop+='<br><a class="pop-link pop-link-gt" href="'+a.georgiaTo+'" target="_blank">&#127468;&#127466; Wiecej na georgia.to &rarr;</a>';
   var m=L.marker([a.lat,a.lng],{icon:mkI(a.color,a.sz)});
   m.addTo(map);
   m.bindPopup(pop,{maxWidth:260});
