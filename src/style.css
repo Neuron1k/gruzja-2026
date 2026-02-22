@@ -99,6 +99,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;z-index:2000;background:#fff;border-bottom:2px solid #dadce0;height:46px;align-items:stretch}
 .mobile-nav button{flex:1;border:none;border-bottom:3px solid transparent;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#5f6368;letter-spacing:.3px;transition:all .2s}
 .mobile-nav button.active{color:#1a73e8;border-bottom-color:#1a73e8}
+.day-nav{display:flex;gap:4px;padding:8px 14px;border-bottom:1px solid #e0e0e0;background:#fff;position:sticky;top:0;z-index:10;flex-shrink:0}
+.day-nav button{width:32px;height:32px;border-radius:50%;border:2px solid #dadce0;background:#fff;cursor:pointer;font-size:12px;font-weight:700;color:#5f6368;transition:all .15s;flex-shrink:0;padding:0}
+.day-nav button:hover{background:#f1f3f4}
+.day-nav button.dn-on{background:#1a73e8;color:#fff;border-color:#1a73e8}
+.day-nav button.dn-easter{border-color:#ea4335}
+.day-nav button.dn-easter.dn-on{background:#ea4335;border-color:#ea4335}
 @media(max-width:768px){
   .mobile-nav{display:flex;height:50px}
   .mobile-nav button{font-size:14px}
@@ -139,6 +145,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .acc-detail{font-size:11px}
   .acc-price{font-size:12px}
   .acc-links a{font-size:12px;min-height:40px;display:inline-flex;align-items:center}
+  .day-nav{gap:6px;padding:8px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .day-nav::-webkit-scrollbar{display:none}
+  .day-nav button{width:36px;height:36px;font-size:13px}
 }
 .acc-section{margin-bottom:16px}
 .acc-section h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:600;color:#e91e63;margin:10px 0 6px}

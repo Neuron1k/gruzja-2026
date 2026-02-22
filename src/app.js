@@ -67,6 +67,12 @@ function getDays(){
 
 function render(){
   var days=getDays(),h="";
+  h+='<div class="day-nav">';
+  days.forEach(function(d,i){
+    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+  });
+  h+='</div>';
   days.forEach(function(d,i){
     var cls="dc"+(d.easter?" easter-bg":"")+(ad===i?" on":"");
     h+='<div class="'+cls+'" onclick="sel('+i+')">';
@@ -110,6 +116,8 @@ function sel(i){
   ad=ad===i?null:i;
   render();
   if(ad!==null){
+    var navBtn=document.querySelector('.day-nav .dn-on');
+    if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
     var days=getDays(),d=days[ad],bounds=[];
     d.points.forEach(function(pid){if(markers[pid])bounds.push(markers[pid].m.getLatLng());});
     if(bounds.length>1)map.fitBounds(bounds,{padding:[50,50],maxZoom:11});
