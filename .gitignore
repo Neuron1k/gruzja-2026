@@ -1,2 +1,8 @@
 .worktrees/
 tmp
+.DS_Store
+node_modules/
+package.json
+package-lock.json
+test-output/
+.playwright-mcp/
