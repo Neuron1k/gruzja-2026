@@ -1,7 +1,13 @@
 // === MAPA ===
 var map = L.map("map",{zoomControl:false}).setView([42.0,44.0],8);
 L.control.zoom({position:"topright"}).addTo(map);
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"OpenStreetMap",maxZoom:18}).addTo(map);
+var baseLayers={
+  "Topograficzna":L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",{attribution:'&copy; OpenTopoMap',maxZoom:17}),
+  "Standardowa":L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"OpenStreetMap",maxZoom:18}),
+  "Satelita":L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",{attribution:"Esri",maxZoom:18})
+};
+baseLayers["Topograficzna"].addTo(map);
+L.control.layers(baseLayers,null,{position:"topright"}).addTo(map);
 
 function mkI(c,s){return L.divIcon({html:'<div class="cm" style="background:'+c+';width:'+s+'px;height:'+s+'px"></div>',iconSize:[s,s],iconAnchor:[s/2,s/2],className:""});}
 
