@@ -691,6 +691,7 @@ function initSheetGestures(){
 
 // === MOBILE VIEW ===
 function mobileView(v){
+  if(window.innerWidth<=768 && document.getElementById('bottomSheet')) return;
   var b=document.body;
   if(v==='map'){
     b.classList.add('m-map');b.classList.remove('m-list');
@@ -705,7 +706,7 @@ function mobileView(v){
     var ov=document.getElementById('mapFilterOverlay');if(ov)ov.classList.remove('show');
   }
 }
-if(window.innerWidth<=768)document.body.classList.add('m-list');
+// Bottom sheet mode: m-list/m-map no longer needed on mobile
 window.addEventListener('resize',function(){
   if(window.innerWidth>768){
     document.body.classList.remove('m-map','m-list');
@@ -721,15 +722,14 @@ window.addEventListener('resize',function(){
 (function(){
   var startX=0,startY=0;
   document.addEventListener('touchstart',function(e){
-    var scrollEl=document.getElementById('daysList');
-    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    var target=window.innerWidth<=768?document.getElementById('bsContent'):document.getElementById('daysList');
+    if(!target||!target.contains(e.target)) return;
     startX=e.touches[0].clientX;
     startY=e.touches[0].clientY;
   },{passive:true});
   document.addEventListener('touchend',function(e){
-    if(window.innerWidth>768) return;
-    var scrollEl=document.getElementById('daysList');
-    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    var target=window.innerWidth<=768?document.getElementById('bsContent'):document.getElementById('daysList');
+    if(!target||!target.contains(e.target)) return;
     var endX=e.changedTouches[0].clientX;
     var endY=e.changedTouches[0].clientY;
     var dx=endX-startX;
