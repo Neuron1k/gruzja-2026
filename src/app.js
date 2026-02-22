@@ -498,16 +498,27 @@ function highlightDayMarkers(dayPoints){
     if(!el) return;
     var dot=el.querySelector('.cm');
     if(!dot) return;
+    // Remove any existing day badge
+    var existing=dot.querySelector('.cm-day');
+    if(existing) existing.remove();
     if(!dayPoints){
       dot.classList.remove('cm-dim','cm-highlight');
       return;
     }
     if(dayPoints.indexOf(id)!==-1){
+      // Active day marker: highlight, no badge
       dot.classList.remove('cm-dim');
       dot.classList.add('cm-highlight');
     }else{
+      // Dimmed marker: show day number badge
       dot.classList.remove('cm-highlight');
       dot.classList.add('cm-dim');
+      if(attrToDays[id]){
+        var badge=document.createElement('span');
+        badge.className='cm-day';
+        badge.textContent=attrToDays[id].map(function(di){return di+1;}).join(',');
+        dot.appendChild(badge);
+      }
     }
   });
 }
