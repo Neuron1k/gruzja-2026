@@ -205,7 +205,10 @@ function sel(i){
   else ad=ad===i?null:i;
   render();
   renderMapDayBar();
-  renderBottomBar();
+  if(window.innerWidth<=768){
+    renderBottomBar();
+    setSheetSnap(SNAP_PEEK);
+  }
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
     if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
@@ -252,14 +255,14 @@ function flyTo(id){
   if(markers[id]){
     var m=markers[id].m;
     if(!map.hasLayer(m))m.addTo(map);
-    if(window.innerWidth<=768){mobileView('map');showBackBtn();}
+    if(window.innerWidth<=768){setSheetSnap(SNAP_PEEK);}
     map.setView(m.getLatLng(),12);
     setTimeout(function(){m.openPopup();},200);
   }
 }
 
 function goToDay(i){
-  if(window.innerWidth<=768) mobileView('list');
+  if(window.innerWidth<=768) setSheetSnap(SNAP_HALF);
   ad=i;
   render();
   var scrollEl=document.getElementById('daysList');
@@ -269,7 +272,7 @@ function goToDay(i){
 function showDayOnMap(i){
   var days=getDays(),d=days[i],bounds=[];
   d.points.forEach(function(pid){if(markers[pid])bounds.push(markers[pid].m.getLatLng());});
-  if(window.innerWidth<=768){mobileView('map');showBackBtn();}
+  if(window.innerWidth<=768){setSheetSnap(SNAP_PEEK);}
   if(bounds.length>1)map.fitBounds(bounds,{padding:[50,50],maxZoom:12});
   else if(bounds.length===1)map.setView(bounds[0],12);
   highlightDayMarkers(d.points);
