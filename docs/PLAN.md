@@ -8,16 +8,6 @@
 
 ---
 
-## Jedyna decyzja w planie
-
-> **Dzień 5: Kazbegi — tak czy nie?**
-> Chętni jadą na Kazbegi z lokalnym kierowcą (cały dzień, dorośli).
-> Reszta jedzie do Sighnaghi (nocleg!) lub zostaje w Tbilisi z dziećmi.
->
-> Łączny czas jazdy (główne auto): **~14-15h** · Kazbegi osobno z kierowcą: **+9-10h**
-
----
-
 ## Plan dzienny
 
 ### Dzień 1 — Czw 2.04 · Przylot – Kutaisi · (~30 min)
@@ -118,30 +108,9 @@
 
 ---
 
-### Dzień 5 — Pon 6.04 · Dzień opcji (SPLIT!) · (0–2h jazdy)
+### Dzień 5 — Pon 6.04 · Sighnaghi + winnica · (~2h jazdy)
 
-> **Każdy wybiera swoją opcję!** Jedyna decyzja w całym planie.
-
-#### 🏔️ Opcja KAZBEGI — dorośli, cały dzień
-
-- Wyjazd rano z Tbilisi **z lokalnym kierowcą (4x4)**
-- Ananuri — twierdza nad jeziorem Zhinvali (przystanek po drodze)
-- Gudauri — panorama Kaukazu, Pomnik Przyjaźni Narodów
-- Stepantsminda — widoki na Kazbek (5047m!) + Gergeti Trinity
-- Obiad: Rooms Hotel Kazbegi (widoki!)
-- Powrót do Tbilisi wieczorem
-
-**Tips Kazbegi:**
-- ⚠️ **Lokalny kierowca rekomendowany!** Serpentyny, TIR-y, Cross Pass (2395m). W kwietniu możliwy śnieg/lód
-- Realny czas: **4-5h w jedną stronę** (Google kłamie — mówi 3h)
-- Gruzińska Droga Wojenna = spektakularna ale męcząca
-- Bez trekkingu do Gergeti — tylko widoki i zdjęcia
-- Sprawdź warunki na przełęczy dzień wcześniej!
-
-> 🏠 **Nocleg:** Tbilisi
-
-#### 🍷 Opcja SIGHNAGHI — z dziećmi OK! cały dzień + nocleg
-
+**Program:**
 - Przejazd Tbilisi → Sighnaghi (~2h)
 - Spacer po murach, widok na dolinę Alazani
 - Degustacja wina: Okro's Wines (taras z widokiem!)
@@ -150,39 +119,23 @@
 **Jedzenie:**
 - **Okro's Wines** ⭐ 4.5 (636) — Taras z widokiem na Alazani! Degustacja + jedzenie. Właściciel mówi po angielsku. Lepszy niż Pheasants Tears dla rodzin.
 
-**Tips Sighnaghi:**
+**Tips:**
 - Sighnaghi: 2-3h spaceru po murach + kolacja. Perełka!
 - Guest House Vista: wycieczka po winnicy 20 GEL/os
+- Sighnaghi z dziećmi OK! Mury + wino + spokojny wieczór
 - Mtskheta (UNESCO) robimy **jutro po drodze powrotnej** — leży na trasie!
 
 > 🏠 **Nocleg:** Sighnaghi · Guest House Vista (zarezerwowane, free cancel!)
-
-#### 🏙️ Opcja TBILISI — spokojny dzień
-
-- Mtatsminda Park (jeśli nie byli w dzień 4)
-- Zoo / Contact Zoo / Ogród Botaniczny
-- Spacer, kawiarnie, relaks
-
-> 🏠 **Nocleg:** Tbilisi
 
 ---
 
 ### Dzień 6 — Wt 7.04 · Powrót + Mtskheta + Cooking class · (~2.5h jazdy)
 
-> Cała grupa spotyka się w Tbilisi na cooking class!
-
 **Program:**
-
-**Ci z Sighnaghi (rano):**
 - Poranek w Sighnaghi → wyjazd ~10:00
 - Opcja: Khareba Winery po drodze (30 min od Sighnaghi) — tunel wina 7.7 km w skale! Plac zabaw + lody
 - **Mtskheta po drodze** (~2h od Sighnaghi): Svetitskhoveli + Jvari Monastery (UNESCO!)
 - Przyjazd do Tbilisi ~14:00
-
-**Reszta (Tbilisi):**
-- Wolny poranek
-
-**Wszyscy razem (popołudnie):**
 - Cooking class: khinkali + khachapuri! 🥟
 - Kolacja: to co ugotowaliście!
 
@@ -247,9 +200,7 @@
 | Martyna z Gruzji 🧑‍✈️ — z kierowcą, zero stresu | €1260 + ~€250 paliwo = €1510 | ~€168 |
 | Kierowca + przewodnik PL 🇵🇱 | €1260 + €1400 przewodnik + ~€250 paliwo = **€2910** | ~€323 |
 
-> CheckInKutaisi: dep. €100 zwrotny, foteliki gratis, CDW w cenie. Kierowca = +€107/os ale zero stresu + zna drogi (Kazbegi!). Przewodnik PL: +€156/os ale komfort i wiedza.
->
-> **Opcja Kazbegi:** Lokalny kierowca z 4x4 na cały dzień (Tbilisi → Kazbegi → Tbilisi) to ok. **150-200 GEL (~€55-75)** — dzielone na chętnych. Niezależne od wynajmu głównego auta.
+> CheckInKutaisi: dep. €100 zwrotny, foteliki gratis, CDW w cenie.
 
 ### Szacunek na osobę (self-drive)
 
