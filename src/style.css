@@ -166,6 +166,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .day-arrow{font-size:13px;min-height:44px;display:flex;align-items:center}
   .chip-easter{display:none}
   .leg{display:none}
+  .panel-head{display:none}
+  .main-tabs{display:none}
+  .day-nav{display:none}
+  .extra-toggle{display:none}
+  .extra-list{display:none}
 }
 .acc-section{margin-bottom:16px}
 .acc-section h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;font-weight:600;color:#e91e63;margin:10px 0 6px}
