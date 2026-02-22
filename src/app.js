@@ -81,6 +81,37 @@ var lineB=L.polyline(routeB,{color:"#f9ab00",weight:2,opacity:0.4,dashArray:"6,8
 // === PLAN DZIENNY ===
 var ad=null;
 
+function renderProgram(program){
+  var main=[],opts=[];
+  program.forEach(function(p){
+    var txt=Array.isArray(p)?p[0]:p;
+    if(typeof txt==='string'&&txt.indexOf('Opcja:')=== 0) opts.push(p);
+    else main.push(p);
+  });
+  var h='<ul>';
+  main.forEach(function(p){
+    var txt=Array.isArray(p)?p[0]:p;
+    var pid=Array.isArray(p)?p[1]:null;
+    if(txt==="---") h+='<li class="sep"></li>';
+    else if(pid&&markers[pid]) h+='<li class="prog-link" onclick="event.stopPropagation();flyTo(\''+pid+'\')">'+txt+'</li>';
+    else h+="<li>"+txt+"</li>";
+  });
+  h+="</ul>";
+  if(opts.length){
+    h+='<details class="prog-opts" onclick="event.stopPropagation()"><summary>Opcje dodatkowe ('+opts.length+')</summary><ul>';
+    opts.forEach(function(p){
+      var txt=Array.isArray(p)?p[0]:p;
+      var pid=Array.isArray(p)?p[1]:null;
+      // Strip "Opcja: " prefix for cleaner display
+      txt=txt.replace(/^Opcja:\s*/,'');
+      if(pid&&markers[pid]) h+='<li class="prog-link" onclick="event.stopPropagation();flyTo(\''+pid+'\')">'+txt+'</li>';
+      else h+="<li>"+txt+"</li>";
+    });
+    h+='</ul></details>';
+  }
+  return h;
+}
+
 function getDays(){
   return JSON.parse(JSON.stringify(DAYS_A));
 }
@@ -105,15 +136,7 @@ function render(){
     h+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
     h+='<div class="det show">';
     if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
-    h+='<div class="ds prog"><h4>&#128205; Program</h4><ul>';
-    d.program.forEach(function(p){
-      var txt=Array.isArray(p)?p[0]:p;
-      var pid=Array.isArray(p)?p[1]:null;
-      if(txt==="---") h+='<li class="sep"></li>';
-      else if(pid&&markers[pid]) h+='<li class="prog-link" onclick="event.stopPropagation();flyTo(\''+pid+'\')">'+txt+'</li>';
-      else h+="<li>"+txt+"</li>";
-    });
-    h+="</ul></div>";
+    h+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
     h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
     d.food.forEach(function(f){
       h+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
@@ -151,15 +174,7 @@ function render(){
       h+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
       h+='<div class="det'+(ad===i?" show":"")+'">';
       if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
-      h+='<div class="ds prog"><h4>&#128205; Program</h4><ul>';
-      d.program.forEach(function(p){
-        var txt=Array.isArray(p)?p[0]:p;
-        var pid=Array.isArray(p)?p[1]:null;
-        if(txt==="---") h+='<li class="sep"></li>';
-        else if(pid&&markers[pid]) h+='<li class="prog-link" onclick="event.stopPropagation();flyTo(\''+pid+'\')">'+txt+'</li>';
-        else h+="<li>"+txt+"</li>";
-      });
-      h+="</ul></div>";
+      h+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
       h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
       d.food.forEach(function(f){
         h+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';

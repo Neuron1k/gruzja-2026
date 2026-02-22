@@ -229,3 +229,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .cm-day{position:absolute;top:-6px;right:-10px;background:rgba(0,0,0,.65);color:#fff;font-size:8px;font-weight:700;padding:1px 3px;border-radius:6px;line-height:1;white-space:nowrap;pointer-events:none}
 @keyframes marker-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
 .cm-highlight{animation:marker-pulse 1.5s ease-in-out infinite;box-shadow:0 0 8px 3px rgba(26,115,232,.5)!important}
+.prog-opts{margin-top:4px;border-top:1px dashed #dadce0;padding-top:4px}
+.prog-opts summary{cursor:pointer;font-size:10px;font-weight:600;color:#9aa0a6;letter-spacing:.3px;list-style:none;user-select:none}
+.prog-opts summary::-webkit-details-marker{display:none}
+.prog-opts summary::before{content:"▸ ";font-size:9px}
+.prog-opts[open] summary::before{content:"▾ "}
+.prog-opts ul{margin-top:3px;padding-left:14px}
+.prog-opts li{color:#5f6368}
