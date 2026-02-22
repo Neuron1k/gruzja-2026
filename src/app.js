@@ -572,6 +572,104 @@ function renderBottomBar(){
   bar.innerHTML=h;
 }
 
+// === BOTTOM SHEET GESTURES ===
+var SNAP_PEEK=0.35, SNAP_HALF=0.60, SNAP_FULL=0.92;
+var sheetSnap=SNAP_PEEK;
+var sheetDragging=false;
+var sheetStartY=0, sheetStartSnap=0;
+
+function setSheetSnap(snap){
+  sheetSnap=snap;
+  var sheet=document.getElementById('bottomSheet');
+  if(!sheet) return;
+  var vh=window.innerHeight;
+  var barH=56;
+  var maxH=vh-barH;
+  var h=Math.round(snap*maxH);
+  sheet.style.height=h+'px';
+  sheet.style.transition='height .3s cubic-bezier(.4,0,.2,1)';
+  var content=document.getElementById('bsContent');
+  if(content){
+    var handleH=40;
+    content.style.height=(h-handleH)+'px';
+    if(snap>=SNAP_FULL-0.01){
+      content.style.overflowY='auto';
+    } else {
+      content.style.overflowY='hidden';
+      content.scrollTop=0;
+    }
+  }
+  setTimeout(function(){if(typeof map!=='undefined')map.invalidateSize();},350);
+}
+
+function initSheetGestures(){
+  var handle=document.getElementById('bsHandle');
+  var sheet=document.getElementById('bottomSheet');
+  var content=document.getElementById('bsContent');
+  if(!handle||!sheet) return;
+
+  handle.addEventListener('touchstart',function(e){
+    sheetDragging=true;
+    sheetStartY=e.touches[0].clientY;
+    sheetStartSnap=sheetSnap;
+    sheet.style.transition='none';
+  },{passive:true});
+
+  document.addEventListener('touchmove',function(e){
+    if(!sheetDragging) return;
+    var dy=sheetStartY-e.touches[0].clientY;
+    var vh=window.innerHeight;
+    var barH=56;
+    var maxH=vh-barH;
+    var newH=Math.round(sheetStartSnap*maxH)+dy;
+    newH=Math.max(80,Math.min(maxH,newH));
+    sheet.style.height=newH+'px';
+    if(content){
+      var handleH=40;
+      content.style.height=(newH-handleH)+'px';
+      content.style.overflowY='hidden';
+    }
+  },{passive:true});
+
+  document.addEventListener('touchend',function(e){
+    if(!sheetDragging) return;
+    sheetDragging=false;
+    var vh=window.innerHeight;
+    var barH=56;
+    var maxH=vh-barH;
+    var currentH=parseInt(sheet.style.height)||0;
+    var currentRatio=currentH/maxH;
+    var snaps=[SNAP_PEEK,SNAP_HALF,SNAP_FULL];
+    var closest=snaps[0];
+    snaps.forEach(function(s){
+      if(Math.abs(s-currentRatio)<Math.abs(closest-currentRatio)) closest=s;
+    });
+    setSheetSnap(closest);
+  },{passive:true});
+
+  // Content drag-to-resize: when at top of scroll in half/peek, drag up to expand
+  var contentStartY=0;
+  content.addEventListener('touchstart',function(e){
+    contentStartY=e.touches[0].clientY;
+  },{passive:true});
+
+  content.addEventListener('touchmove',function(e){
+    if(sheetDragging) return;
+    if(sheetSnap>=SNAP_FULL-0.01 && content.scrollTop>0) return;
+    if(content.scrollTop<=0){
+      var dy=contentStartY-e.touches[0].clientY;
+      if((dy>10 && sheetSnap<SNAP_FULL)||(dy<-10 && sheetSnap>SNAP_PEEK)){
+        sheetDragging=true;
+        sheetStartY=contentStartY;
+        sheetStartSnap=sheetSnap;
+        sheet.style.transition='none';
+      }
+    }
+  },{passive:true});
+
+  setSheetSnap(SNAP_PEEK);
+}
+
 // === MOBILE VIEW ===
 function mobileView(v){
   var b=document.body;
@@ -593,6 +691,9 @@ window.addEventListener('resize',function(){
   if(window.innerWidth>768){
     document.body.classList.remove('m-map','m-list');
     if(typeof map!=='undefined')map.invalidateSize();
+  } else {
+    if(typeof setSheetSnap==='function') setSheetSnap(sheetSnap);
+    renderBottomBar();
   }
   render();
 });
@@ -648,3 +749,4 @@ renderNoclegi();
 renderAnkieta();
 renderMapDayBar();
 renderBottomBar();
+if(window.innerWidth<=768) initSheetGestures();
