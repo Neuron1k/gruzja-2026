@@ -535,6 +535,31 @@ window.addEventListener('resize',function(){
   render();
 });
 
+// === SWIPE ===
+(function(){
+  var startX=0,startY=0;
+  document.addEventListener('touchstart',function(e){
+    var scrollEl=document.getElementById('daysList');
+    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    startX=e.touches[0].clientX;
+    startY=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(window.innerWidth>768) return;
+    var scrollEl=document.getElementById('daysList');
+    if(!scrollEl||!scrollEl.contains(e.target)) return;
+    var endX=e.changedTouches[0].clientX;
+    var endY=e.changedTouches[0].clientY;
+    var dx=endX-startX;
+    var dy=endY-startY;
+    if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){
+      var days=getDays();
+      if(dx<0 && ad<days.length-1) sel(ad+1);
+      else if(dx>0 && ad>0) sel(ad-1);
+    }
+  },{passive:true});
+})();
+
 // === INIT ===
 if(window.innerWidth<=768) ad=0;
 render();
