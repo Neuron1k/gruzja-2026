@@ -77,8 +77,11 @@ function render(){
     if(d.split) h+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
     h+='<div class="ds prog"><h4>&#128205; Program</h4><ul>';
     d.program.forEach(function(p){
-      if(p==="---") h+='<li class="sep"></li>';
-      else h+="<li>"+p+"</li>";
+      var txt=Array.isArray(p)?p[0]:p;
+      var pid=Array.isArray(p)?p[1]:null;
+      if(txt==="---") h+='<li class="sep"></li>';
+      else if(pid&&markers[pid]) h+='<li class="prog-link" onclick="event.stopPropagation();flyTo(\''+pid+'\')">'+txt+'</li>';
+      else h+="<li>"+txt+"</li>";
     });
     h+="</ul></div>";
     h+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
@@ -138,8 +141,9 @@ function flyTo(id){
   if(markers[id]){
     var m=markers[id].m;
     if(!map.hasLayer(m))m.addTo(map);
+    if(window.innerWidth<=768)mobileView('map');
     map.setView(m.getLatLng(),12);
-    m.openPopup();
+    setTimeout(function(){m.openPopup();},200);
   }
 }
 

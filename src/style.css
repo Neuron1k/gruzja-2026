@@ -59,6 +59,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .leg-i{display:flex;align-items:center;gap:3px;cursor:pointer;user-select:none;transition:opacity .2s}
 .leg-d{width:8px;height:8px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px #bbb}
 .sep{list-style:none;border-top:1px dashed #dadce0;margin:3px 0;padding:0}
+.prog-link{color:#1a73e8;cursor:pointer;transition:color .12s}
+.prog-link:hover{color:#1557b0;text-decoration:underline}
+.prog-link::after{content:" ↗";font-size:9px;opacity:.5}
 .budget-inner h4{font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin:10px 0 6px;font-weight:600;color:#1a73e8}
 .budget-inner h4:first-child{margin-top:0}
 .budget-inner table{width:100%;border-collapse:collapse;margin-bottom:6px}
