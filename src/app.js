@@ -203,6 +203,7 @@ function sel(i){
   else ad=ad===i?null:i;
   render();
   renderMapDayBar();
+  renderBottomBar();
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
     if(navBtn)navBtn.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
@@ -556,6 +557,19 @@ function renderMapDayBar(){
   bar.innerHTML=h;
 }
 
+// === BOTTOM BAR ===
+function renderBottomBar(){
+  var bar=document.getElementById('bottomBar');
+  if(!bar) return;
+  var days=getDays(),h='';
+  days.forEach(function(d,i){
+    var cls=''+(ad===i?' dn-on':'')+(d.easter?' dn-easter':'');
+    h+='<button class="'+cls.trim()+'" onclick="event.stopPropagation();sel('+i+')">'+d.num+'</button>';
+  });
+  h+='<button class="bb-hamburger" onclick="toggleDrawer()">☰</button>';
+  bar.innerHTML=h;
+}
+
 // === MOBILE VIEW ===
 function mobileView(v){
   var b=document.body;
@@ -631,3 +645,4 @@ renderPacking();
 renderNoclegi();
 renderAnkieta();
 renderMapDayBar();
+renderBottomBar();
