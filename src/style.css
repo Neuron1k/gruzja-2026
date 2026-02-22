@@ -151,7 +151,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
   .bs-handle{padding:10px 0 6px;cursor:grab;touch-action:none;display:flex;justify-content:center}
   .bs-handle-bar{width:36px;height:4px;border-radius:2px;background:#dadce0}
   .bs-content{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-
   /* === DAY CONTENT inside bottom sheet === */
   .bs-content .dc{padding:14px 16px;border-bottom:1px solid #f0f0f0;cursor:default}
   .bs-content .dc.on{background:#e8f0fe;border-left:3px solid #1a73e8}

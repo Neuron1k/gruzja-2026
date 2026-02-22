@@ -592,7 +592,7 @@ function renderBottomBar(){
 }
 
 // === BOTTOM SHEET GESTURES ===
-var SNAP_PEEK=0.35, SNAP_HALF=0.60, SNAP_FULL=0.92;
+var SNAP_MIN=0.03, SNAP_PEEK=0.35, SNAP_HALF=0.60, SNAP_FULL=0.92;
 var sheetSnap=SNAP_PEEK;
 var sheetDragging=false;
 var sheetStartY=0, sheetStartSnap=0;
@@ -610,7 +610,7 @@ function setSheetSnap(snap){
   var content=document.getElementById('bsContent');
   if(content){
     var handleH=40;
-    content.style.height=(h-handleH)+'px';
+    content.style.height=Math.max(0,h-handleH)+'px';
     if(snap>=SNAP_FULL-0.01){
       content.style.overflowY='auto';
     } else {
@@ -641,11 +641,11 @@ function initSheetGestures(){
     var barH=56;
     var maxH=vh-barH;
     var newH=Math.round(sheetStartSnap*maxH)+dy;
-    newH=Math.max(80,Math.min(maxH,newH));
+    newH=Math.max(0,Math.min(maxH,newH));
     sheet.style.height=newH+'px';
     if(content){
       var handleH=40;
-      content.style.height=(newH-handleH)+'px';
+      content.style.height=Math.max(0,newH-handleH)+'px';
       content.style.overflowY='hidden';
     }
   },{passive:true});
@@ -658,7 +658,7 @@ function initSheetGestures(){
     var maxH=vh-barH;
     var currentH=parseInt(sheet.style.height)||0;
     var currentRatio=currentH/maxH;
-    var snaps=[SNAP_PEEK,SNAP_HALF,SNAP_FULL];
+    var snaps=[SNAP_MIN,SNAP_PEEK,SNAP_HALF,SNAP_FULL];
     var closest=snaps[0];
     snaps.forEach(function(s){
       if(Math.abs(s-currentRatio)<Math.abs(closest-currentRatio)) closest=s;
@@ -677,7 +677,7 @@ function initSheetGestures(){
     if(sheetSnap>=SNAP_FULL-0.01 && content.scrollTop>0) return;
     if(content.scrollTop<=0){
       var dy=contentStartY-e.touches[0].clientY;
-      if((dy>10 && sheetSnap<SNAP_FULL)||(dy<-10 && sheetSnap>SNAP_PEEK)){
+      if((dy>10 && sheetSnap<SNAP_FULL)||(dy<-10 && sheetSnap>SNAP_MIN)){
         sheetDragging=true;
         sheetStartY=contentStartY;
         sheetStartSnap=sheetSnap;
