@@ -8,12 +8,13 @@
 
 ---
 
-## Warianty planu
+## Jedyna decyzja w planie
 
-### Wariant A — Spokojny (~15h jazdy łącznie)
-### Wariant B — Z Kazbegi (~20h jazdy łącznie)
-
-Różnica w dniu 5 i 6 — opisana poniżej.
+> **Dzień 5: Kazbegi — tak czy nie?**
+> Chętni jadą na Kazbegi z lokalnym kierowcą (cały dzień, dorośli).
+> Reszta jedzie do Sighnaghi (nocleg!) lub zostaje w Tbilisi z dziećmi.
+>
+> Łączny czas jazdy (główne auto): **~14-15h** · Kazbegi osobno z kierowcą: **+9-10h**
 
 ---
 
@@ -38,6 +39,8 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 - Nie planuj za dużo na dzień 1
 - Sisters otwiera dopiero o 18:00 — nie wchodzi na obiad!
 
+> 🏠 **Nocleg:** Kutaisi · Apartment Soho Tabidze
+
 ---
 
 ### Dzień 2 — Pt 3.04 · Jaskinie i kaniony · (~3h łącznie)
@@ -57,6 +60,8 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 - Martvili: 20 GEL + łódka 20 GEL. UWAGA: dzieci <1m wzrostu NIE mogą na łódkę (3-latek?). Spacer (800m) i tak wart zachodu
 - Okatse: SKIP z dziećmi — wymaga 1h marszu w jedną stronę, za trudny z maluchami
 - Uwaga na parkingu Martvili: "lokalni" mówią że kanion zamknięty — to scam, jedź do kasy!
+
+> 🏠 **Nocleg:** Kutaisi · Apartment Soho Tabidze
 
 ---
 
@@ -79,6 +84,8 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 - Apartament 3–4 pok: $30–50/noc Airbnb/Booking
 - Rike Park: fontanny, plac zabaw + kolejka do Narikala
 - Keto & Kote: ukryta uliczka, uprzedź o 9-osobowej grupie!
+
+> 🏠 **Nocleg:** Tbilisi · Apartament w starym Tbilisi (Airbnb)
 
 ---
 
@@ -107,86 +114,91 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 - Jejili = trawka wielkanocna z pszenicą — kup na targu!
 - Opcja: Kronika Gruzji (⭐ 4.8, darmowe, wow-efekt na zdjęciach, ~15 min taxi)
 
----
-
-### Dzień 5 — Pon 6.04
-
-#### Wariant A: Mtskheta – Sighnaghi (wino!) · (~2.5h)
-
-**Program:**
-- Mtskheta (20 min od Tbilisi)
-- Svetitskhoveli + Jvari Monastery (UNESCO!)
-- Przejazd do Sighnaghi (2h)
-- Spacer po murach, widok na dolinę Alazani
-- Degustacja wina: Okro's Wines
-
-**Jedzenie:**
-- **Okro's Wines** ⭐ 4.5 (636) — Fantastyczny taras z widokiem na dolinę Alazani! Degustacja + jedzenie w jednym. Właściciel mówi po angielsku.
-
-**Tips:**
-- Svetitskhoveli + Jvari: UNESCO, darmowe, 30-45 min na oba. Jvari = widoki na zbieg rzek!
-- Okro's Wines: lepszy wybór niż Pheasants Tears dla rodziny z dziećmi
-- Sighnaghi: 2-3h spaceru po murach + kolacja. Perełka!
-- Nocleg: Eka & Gio Guesthouse (wino z piwnicy!)
-- Guest House Vista: wycieczka po winnicy 20 GEL/os
-
-#### Wariant B: KAZBEGI (lub split!) · (~7h lub 0h!)
-
-**Program:**
-- OPCJA A: Chętni jadą na Kazbegi!
-  - Ananuri (twierdza, 1.5h)
-  - Gudauri (panorama Kaukazu)
-  - Stepantsminda (widoki na Kazbek 5047m!)
-  - BEZ trekkingu — tylko widoki i zdjęcia
-- ---
-- OPCJA B: Rodzice z dziećmi w Tbilisi!
-  - Mtatsminda Park (jeśli nie byli)
-  - Zoo / Contact Zoo / Ogród Botaniczny
-  - Spacer, kawiarnie, relaks
-
-> **OPCJA SPLIT:** Część grupy jedzie na Kazbegi (cały dzień), reszta z dziećmi w Tbilisi. Win-win!
-
-**Tips:**
-- Droga górska — sprawdź warunki w kwietniu!
-- Kazbegi: 3.5h w jedną stronę
-- Gruzińska Droga Wojenna = WOW
-- Bez trekkingu do Gergeti (za stromo z dziećmi)
+> 🏠 **Nocleg:** Tbilisi · Apartament w starym Tbilisi (Airbnb)
 
 ---
 
-### Dzień 6 — Wt 7.04
+### Dzień 5 — Pon 6.04 · Dzień opcji (SPLIT!) · (0–2h jazdy)
 
-#### Wariant A: Winnice + cooking class · (~2.5h)
+> **Każdy wybiera swoją opcję!** Jedyna decyzja w całym planie.
 
-**Program:**
-- Cooking class: khinkali + khachapuri!
-- Khareba Winery: tunel wina + plac zabaw + lody
-- LUB Kindzmarauli Corp. (od 1533!): 8 GEL/os
-- Powrót do Tbilisi
+#### 🏔️ Opcja KAZBEGI — dorośli, cały dzień
 
-**Jedzenie:**
-- **Cooking class** — Najlepszy posiłek dnia!
-- **Sasadilo at Zeche** ⭐ 4.5 (1.5k) — Fuzja w dawnej fabryce tytoniu
-
-**Tips:**
-- Cooking class: MUST-DO! GetYourGuide / Eat This! Tours (4.8+), 20–50 EUR/os. Zarezerwuj wcześniej, szukaj family-friendly
-- Khareba: tunel 7.7 km w skale! Plac zabaw + lody = kluczowe z dziećmi. Degustacja raczej masowa, ale tunel robi wrażenie
-- Dzieci kochają lepienie khinkali!
-- Churchkhela na prezenty = kup w Kvareli
-
-#### Wariant B: Mtskheta + Kakheti (1 dzień) · (~4.5h)
-
-**Program:**
-- Mtskheta: Svetitskhoveli + Jvari (UNESCO)
-- Sighnaghi — spacer + degustacja
-- Okro's Wines
-- Cooking class (jeśli zdążycie!)
+- Wyjazd rano z Tbilisi **z lokalnym kierowcą (4x4)**
+- Ananuri — twierdza nad jeziorem Zhinvali (przystanek po drodze)
+- Gudauri — panorama Kaukazu, Pomnik Przyjaźni Narodów
+- Stepantsminda — widoki na Kazbek (5047m!) + Gergeti Trinity
+- Obiad: Rooms Hotel Kazbegi (widoki!)
 - Powrót do Tbilisi wieczorem
 
+**Tips Kazbegi:**
+- ⚠️ **Lokalny kierowca rekomendowany!** Serpentyny, TIR-y, Cross Pass (2395m). W kwietniu możliwy śnieg/lód
+- Realny czas: **4-5h w jedną stronę** (Google kłamie — mówi 3h)
+- Gruzińska Droga Wojenna = spektakularna ale męcząca
+- Bez trekkingu do Gergeti — tylko widoki i zdjęcia
+- Sprawdź warunki na przełęczy dzień wcześniej!
+
+> 🏠 **Nocleg:** Tbilisi
+
+#### 🍷 Opcja SIGHNAGHI — z dziećmi OK! cały dzień + nocleg
+
+- Przejazd Tbilisi → Sighnaghi (~2h)
+- Spacer po murach, widok na dolinę Alazani
+- Degustacja wina: Okro's Wines (taras z widokiem!)
+- Kolacja i wieczór w Sighnaghi
+
+**Jedzenie:**
+- **Okro's Wines** ⭐ 4.5 (636) — Taras z widokiem na Alazani! Degustacja + jedzenie. Właściciel mówi po angielsku. Lepszy niż Pheasants Tears dla rodzin.
+
+**Tips Sighnaghi:**
+- Sighnaghi: 2-3h spaceru po murach + kolacja. Perełka!
+- Guest House Vista: wycieczka po winnicy 20 GEL/os
+- Mtskheta (UNESCO) robimy **jutro po drodze powrotnej** — leży na trasie!
+
+> 🏠 **Nocleg:** Sighnaghi · Guest House Vista (zarezerwowane, free cancel!)
+
+#### 🏙️ Opcja TBILISI — spokojny dzień
+
+- Mtatsminda Park (jeśli nie byli w dzień 4)
+- Zoo / Contact Zoo / Ogród Botaniczny
+- Spacer, kawiarnie, relaks
+
+> 🏠 **Nocleg:** Tbilisi
+
+---
+
+### Dzień 6 — Wt 7.04 · Powrót + Mtskheta + Cooking class · (~2.5h jazdy)
+
+> Cała grupa spotyka się w Tbilisi na cooking class!
+
+**Program:**
+
+**Ci z Sighnaghi (rano):**
+- Poranek w Sighnaghi → wyjazd ~10:00
+- Opcja: Khareba Winery po drodze (30 min od Sighnaghi) — tunel wina 7.7 km w skale! Plac zabaw + lody
+- **Mtskheta po drodze** (~2h od Sighnaghi): Svetitskhoveli + Jvari Monastery (UNESCO!)
+- Przyjazd do Tbilisi ~14:00
+
+**Reszta (Tbilisi):**
+- Wolny poranek
+
+**Wszyscy razem (popołudnie):**
+- Cooking class: khinkali + khachapuri! 🥟
+- Kolacja: to co ugotowaliście!
+
+**Jedzenie:**
+- **Cooking class** — Najlepszy posiłek dnia! Eat This! Tours (⭐ 4.8+)
+- **Sasadilo at Zeche** ⭐ 4.5 (1.5k) — Kolacja: fuzja w dawnej fabryce tytoniu
+
 **Tips:**
-- Intensywniejszy niż wariant A
-- Brak noclegu w Sighnaghi
-- Alternatywa: skip Mtskheta, więcej czasu na wino
+- Cooking class: MUST-DO! 20–50 EUR/os. Zarezerwuj wcześniej, family-friendly!
+- Dzieci kochają lepienie khinkali!
+- Svetitskhoveli + Jvari: UNESCO, darmowe, 30-45 min. Jvari = widoki na zbieg rzek!
+- Sighnaghi → Mtskheta → Tbilisi: naturalny szlak powrotny, Mtskheta leży po drodze!
+- Khareba: tunel robi wrażenie ale degustacja masowa. Plac zabaw + lody = klucz z dziećmi
+- Lekkie popołudnie po intensywnym dniu 5
+
+> 🏠 **Nocleg:** Tbilisi · Apartament w starym Tbilisi (Airbnb)
 
 ---
 
@@ -207,6 +219,8 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 - Gelati (⭐ 4.8): absolutny must-see! UNESCO, XII-w. mozaiki, 30-45 min, darmowe, 20 min od Kutaisi
 - Rynek = najlepsze miejsce na pamiątki
 - Ostatni wieczór — zrób go wyjątkowym! Sisters na kolację dla atmosfery
+
+> 🏠 **Nocleg:** Kutaisi · Apartment Soho Tabidze
 
 ---
 
@@ -234,6 +248,8 @@ Różnica w dniu 5 i 6 — opisana poniżej.
 | Kierowca + przewodnik PL 🇵🇱 | €1260 + €1400 przewodnik + ~€250 paliwo = **€2910** | ~€323 |
 
 > CheckInKutaisi: dep. €100 zwrotny, foteliki gratis, CDW w cenie. Kierowca = +€107/os ale zero stresu + zna drogi (Kazbegi!). Przewodnik PL: +€156/os ale komfort i wiedza.
+>
+> **Opcja Kazbegi:** Lokalny kierowca z 4x4 na cały dzień (Tbilisi → Kazbegi → Tbilisi) to ok. **150-200 GEL (~€55-75)** — dzielone na chętnych. Niezależne od wynajmu głównego auta.
 
 ### Szacunek na osobę (self-drive)
 
