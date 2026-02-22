@@ -10,6 +10,23 @@
 </head>
 <body>
 <div class="mobile-nav"><button class="hamburger" onclick="toggleDrawer()">☰</button><button id="btn-list" class="active" onclick="mobileView('list')">📋 Lista</button><button id="btn-map" onclick="mobileView('map')">🗺️ Mapa</button></div>
+<div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="drawer" id="drawer">
+<div class="drawer-head">
+<h2>Gruzja 2026</h2>
+<div class="drawer-sub">9 osob (7 doroslych + 2 dzieci)</div>
+<div class="drawer-sub">Kutaisi &middot; 2-9 kwietnia 2026</div>
+<div class="drawer-sub">&#9992; Przylot 2.04 11:30 &middot; Wylot 9.04 12:30</div>
+<div class="drawer-sub">&#129370; Wielkanoc: ndz 5.04</div>
+</div>
+<div class="drawer-links">
+<button onclick="drawerTab('noclegi')">🏨 Noclegi</button>
+<button onclick="drawerTab('budget')">💶 Budżet</button>
+<button onclick="drawerTab('packing')">🎒 Pakowanie</button>
+<button onclick="drawerTab('ankieta')">📋 Ankieta</button>
+<button onclick="drawerTab('plan')">📅 Plan dnia</button>
+</div>
+</div>
 <div class="panel">
 <div class="panel-head">
 <h1>Gruzja &mdash; Plan Wycieczki</h1>
