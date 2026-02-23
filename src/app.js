@@ -616,6 +616,15 @@ function toggleMapFilters(){
     var off=hiddenCats[c[0]]?" off":"";
     h+='<div class="leg-i'+off+'" onclick="toggleCatMobile(\''+c[0]+'\',this)"><div class="leg-d" style="background:'+c[0]+'"></div>'+c[1]+'</div>';
   });
+  h+='<div style="border-top:1px solid #e0e0e0;margin:6px 0 4px"></div>';
+  h+='<div class="leg-i'+(placesVisible?' on':'')+'" id="placesToggleMobile" onclick="togglePlaces()"><div class="leg-d leg-d-sq" style="background:#78909c"></div>georgia.to</div>';
+  if(placesVisible){
+    var pcats=[["Natura","#2e7d32"],["Kultura","#5c6bc0"],["Religia","#8d6e63"],["Kuchnia","#ff8f00"],["Rozrywka","#ec407a"],["Architektura","#78909c"],["Inne","#bdbdbd"]];
+    pcats.forEach(function(c){
+      var off=hiddenPlaceCats[c[0]]?" off":"";
+      h+='<div class="leg-i'+off+'" onclick="togglePlaceCat(\''+c[0]+'\',this)"><div class="leg-d leg-d-sq" style="background:'+c[1]+'"></div>'+c[0]+'</div>';
+    });
+  }
   ov.innerHTML=h;
   ov.classList.add("show");
 }
