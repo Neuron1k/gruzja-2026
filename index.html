@@ -6,7 +6,11 @@
 <title>Gruzja kwiecien 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <link rel="stylesheet" href="src/style.css"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
 <div class="mobile-nav"><button class="hamburger" onclick="toggleDrawer()">☰</button><button id="btn-list" class="active" onclick="mobileView('list')">📋 Lista</button><button id="btn-map" onclick="mobileView('map')">🗺️ Mapa</button></div>
@@ -61,14 +65,14 @@
 <div class="leg-i" onclick="toggleCat('#e91e63',this)"><div class="leg-d" style="background:#e91e63"></div>Noclegi</div>
 <div class="leg-sep"></div>
 <div class="leg-i leg-places" id="placesToggle" onclick="togglePlaces()"><div class="leg-d leg-d-sq" style="background:#78909c"></div>georgia.to</div>
-<div class="places-cats" style="display:none">
-<div class="leg-i" onclick="togglePlaceCat('Natura',this)"><div class="leg-d leg-d-sq" style="background:#2e7d32"></div>Natura</div>
-<div class="leg-i" onclick="togglePlaceCat('Kultura',this)"><div class="leg-d leg-d-sq" style="background:#5c6bc0"></div>Kultura</div>
-<div class="leg-i" onclick="togglePlaceCat('Religia',this)"><div class="leg-d leg-d-sq" style="background:#8d6e63"></div>Religia</div>
-<div class="leg-i" onclick="togglePlaceCat('Kuchnia',this)"><div class="leg-d leg-d-sq" style="background:#ff8f00"></div>Kuchnia</div>
-<div class="leg-i" onclick="togglePlaceCat('Rozrywka',this)"><div class="leg-d leg-d-sq" style="background:#ec407a"></div>Rozrywka</div>
-<div class="leg-i" onclick="togglePlaceCat('Architektura',this)"><div class="leg-d leg-d-sq" style="background:#78909c"></div>Architektura</div>
-<div class="leg-i" onclick="togglePlaceCat('Inne',this)"><div class="leg-d leg-d-sq" style="background:#bdbdbd"></div>Inne</div>
+<div class="places-cats">
+<div class="leg-i" onclick="togglePlaceCat('Natura',this)"><span class="material-symbols-outlined" style="color:#2e7d32;font-size:14px">park</span>Natura</div>
+<div class="leg-i" onclick="togglePlaceCat('Kultura',this)"><span class="material-symbols-outlined" style="color:#5c6bc0;font-size:14px">account_balance</span>Kultura</div>
+<div class="leg-i" onclick="togglePlaceCat('Religia',this)"><span class="material-symbols-outlined" style="color:#8d6e63;font-size:14px">church</span>Religia</div>
+<div class="leg-i" onclick="togglePlaceCat('Kuchnia',this)"><span class="material-symbols-outlined" style="color:#ff8f00;font-size:14px">restaurant</span>Kuchnia</div>
+<div class="leg-i" onclick="togglePlaceCat('Rozrywka',this)"><span class="material-symbols-outlined" style="color:#ec407a;font-size:14px">attractions</span>Rozrywka</div>
+<div class="leg-i" onclick="togglePlaceCat('Architektura',this)"><span class="material-symbols-outlined" style="color:#78909c;font-size:14px">apartment</span>Architektura</div>
+<div class="leg-i" onclick="togglePlaceCat('Inne',this)"><span class="material-symbols-outlined" style="color:#bdbdbd;font-size:14px">place</span>Inne</div>
 </div>
 </div>
 </div>

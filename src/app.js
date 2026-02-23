@@ -76,13 +76,13 @@ function toggleCat(color,el){
 
 // === PLACES OVERLAY ===
 var PLACE_CATS={
-  "Natura":       {color:"#2e7d32", keys:["Natura i Przygoda","Krajobrazy Naturalne","Spa i Wellness"]},
-  "Kultura":      {color:"#5c6bc0", keys:["Kultura i Sztuka","Kulturalny i Artystyczny","Historia","Miejsca historyczne","Miejsca historyczne i archeologiczne"]},
-  "Religia":      {color:"#8d6e63", keys:["Religia","Miejsca religijne"]},
-  "Kuchnia":      {color:"#ff8f00", keys:["Kuchnia"]},
-  "Rozrywka":     {color:"#ec407a", keys:["Rozrywka","Rekreacja i rozrywka","Rodzina"]},
-  "Architektura": {color:"#78909c", keys:["Struktury Architektoniczne","Atrakcje miejskie"]},
-  "Inne":         {color:"#bdbdbd", keys:[]}
+  "Natura":       {color:"#2e7d32", icon:"park", keys:["Natura i Przygoda","Krajobrazy Naturalne","Spa i Wellness"]},
+  "Kultura":      {color:"#5c6bc0", icon:"account_balance", keys:["Kultura i Sztuka","Kulturalny i Artystyczny","Historia","Miejsca historyczne","Miejsca historyczne i archeologiczne"]},
+  "Religia":      {color:"#8d6e63", icon:"church", keys:["Religia","Miejsca religijne"]},
+  "Kuchnia":      {color:"#ff8f00", icon:"restaurant", keys:["Kuchnia"]},
+  "Rozrywka":     {color:"#ec407a", icon:"attractions", keys:["Rozrywka","Rekreacja i rozrywka","Rodzina"]},
+  "Architektura": {color:"#78909c", icon:"apartment", keys:["Struktury Architektoniczne","Atrakcje miejskie"]},
+  "Inne":         {color:"#bdbdbd", icon:"place", keys:[]}
 };
 
 function getPlaceCategory(place){
@@ -101,7 +101,16 @@ function getPlaceCategory(place){
   return "Inne";
 }
 
-var placesLayer=L.layerGroup();
+var placesLayer=L.markerClusterGroup({
+  maxClusterRadius:40,
+  spiderfyOnMaxZoom:true,
+  showCoverageOnHover:false,
+  iconCreateFunction:function(cluster){
+    var count=cluster.getChildCount();
+    var sz=count<10?'small':count<50?'medium':'large';
+    return L.divIcon({html:'<div class="pc pc-'+sz+'">'+count+'</div>',className:'',iconSize:[30,30]});
+  }
+});
 var placesVisible=false;
 var placesBuilt=false;
 var placesMarkers=[];
@@ -111,10 +120,10 @@ function buildPlacesMarkers(){
   if(placesBuilt) return;
   PLACES.forEach(function(p){
     var cat=getPlaceCategory(p);
-    var color=PLACE_CATS[cat].color;
+    var info=PLACE_CATS[cat];
     var icon=L.divIcon({
-      html:'<div class="pm" style="background:'+color+'"></div>',
-      iconSize:[10,10],iconAnchor:[5,5],className:""
+      html:'<span class="pm-icon material-symbols-outlined" style="color:'+info.color+'">'+info.icon+'</span>',
+      iconSize:[20,20],iconAnchor:[10,10],className:""
     });
     var pop='<b>'+p.name_pl+'</b>';
     pop+='<div style="font-size:10px;color:#5f6368;margin:2px 0">'+p.region+' · '+cat+'</div>';
@@ -123,7 +132,7 @@ function buildPlacesMarkers(){
     var m=L.marker([p.lat,p.lng],{icon:icon});
     m.bindPopup(pop,{maxWidth:240});
     placesLayer.addLayer(m);
-    placesMarkers.push({m:m,cat:cat,color:color});
+    placesMarkers.push({m:m,cat:cat,color:info.color});
   });
   placesBuilt=true;
 }
@@ -173,6 +182,7 @@ var lineB=L.polyline(routeB,{color:"#f9ab00",weight:2,opacity:0.4,dashArray:"6,8
 
 // === PLAN DZIENNY ===
 var ad=null;
+var currentPointIdx=null;
 
 function renderProgram(program){
   var main=[],opts=[];
@@ -225,10 +235,11 @@ function render(){
     sh+='<div class="dt">'+d.title+'</div>';
     var cityOnly=d.nocleg?d.nocleg.split(' \u00b7 ')[0]:null;
     sh+='<div class="dr">&#128663; '+d.drive+(cityOnly?' &nbsp;|&nbsp; \ud83c\udfe0 '+cityOnly:'')+'</div>';
+    if(d.points&&d.points.length>1) sh+='<div class="attr-indicator" id="attrIndicator">\u2190 Atrakcja 1/'+d.points.length+' \u2192</div>';
     sh+='<div class="det">';
     if(d.split) sh+='<div class="ds split-box"><h4>&#128161; OPCJA SPLIT</h4>Kazdy wybiera swoja opcje! Chetni na Kazbegi z lokalnym kierowca (caly dzien, dorosli). Reszta do Sighnaghi z noclegiem (Guest House Vista, free cancel!) lub spokojny dzien w Tbilisi. Cooking class razem w dniu 6!</div>';
-    sh+='<div class="ds prog"><h4>&#128205; Program</h4>'+renderProgram(d.program)+'</div>';
-    sh+='<div class="ds food"><h4>&#127869; Jedzenie</h4>';
+    sh+='<details class="ds prog" open onclick="event.stopPropagation()"><summary><h4>&#128205; Program</h4></summary>'+renderProgram(d.program)+'</details>';
+    sh+='<details class="ds food" onclick="event.stopPropagation()"><summary><h4>&#127869; Jedzenie</h4></summary>';
     d.food.forEach(function(f){
       sh+='<div class="food-item"><span class="food-name">'+f[0]+'</span>';
       if(f[1]) sh+=' <span class="food-stars">&#11088; '+f[1]+'</span>';
@@ -236,10 +247,10 @@ function render(){
       if(f[3]) sh+=' <a href="'+f[3]+'" target="_blank">Maps</a>';
       sh+="</div>";
     });
-    sh+="</div>";
-    sh+='<div class="ds tip"><h4>&#128161; Tips</h4><ul>';
+    sh+="</details>";
+    sh+='<details class="ds tip" onclick="event.stopPropagation()"><summary><h4>&#128161; Tips</h4></summary><ul>';
     d.tips.forEach(function(t){sh+="<li>"+t+"</li>";});
-    sh+="</ul></div>";
+    sh+="</ul></details>";
     sh+='<div class="day-map-cta" onclick="event.stopPropagation();showDayOnMap('+i+')">\ud83d\uddfa\ufe0f Pokaz wszystkie punkty na mapie</div>';
     if(d.nocleg){
       var nCity=d.nocleg.split(' \u00b7 ')[0];
@@ -299,11 +310,12 @@ function render(){
 
 function sel(i){
   ad=ad===i?null:i;
+  currentPointIdx=ad!==null?0:null;
   render();
   renderMapDayBar();
   if(window.innerWidth<=768){
     renderBottomBar();
-    setSheetSnap(ad!==null?SNAP_PEEK:SNAP_MIN);
+    setSheetSnap(ad!==null?Math.max(sheetSnap,SNAP_PEEK):SNAP_MIN);
   }
   if(ad!==null){
     var navBtn=document.querySelector('.day-nav .dn-on');
@@ -622,7 +634,8 @@ function toggleMapFilters(){
     var pcats=[["Natura","#2e7d32"],["Kultura","#5c6bc0"],["Religia","#8d6e63"],["Kuchnia","#ff8f00"],["Rozrywka","#ec407a"],["Architektura","#78909c"],["Inne","#bdbdbd"]];
     pcats.forEach(function(c){
       var off=hiddenPlaceCats[c[0]]?" off":"";
-      h+='<div class="leg-i'+off+'" onclick="togglePlaceCat(\''+c[0]+'\',this)"><div class="leg-d leg-d-sq" style="background:'+c[1]+'"></div>'+c[0]+'</div>';
+      var icon=PLACE_CATS[c[0]].icon;
+      h+='<div class="leg-i'+off+'" onclick="togglePlaceCat(\''+c[0]+'\',this)"><span class="material-symbols-outlined" style="color:'+c[1]+';font-size:14px">'+icon+'</span>'+c[0]+'</div>';
     });
   }
   ov.innerHTML=h;
@@ -841,9 +854,23 @@ window.addEventListener('resize',function(){
     var dx=endX-startX;
     var dy=endY-startY;
     if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){
+      // Mobile at SNAP_PEEK with a day selected: swipe through attractions
+      if(window.innerWidth<=768 && sheetSnap<=SNAP_PEEK && ad!==null){
+        var days=getDays(),pts=days[ad].points;
+        if(pts&&pts.length>0){
+          if(currentPointIdx===null) currentPointIdx=0;
+          if(dx<0 && currentPointIdx<pts.length-1) currentPointIdx++;
+          else if(dx>0 && currentPointIdx>0) currentPointIdx--;
+          flyTo(pts[currentPointIdx]);
+          var ind=document.getElementById('attrIndicator');
+          if(ind) ind.textContent='\u2190 Atrakcja '+(currentPointIdx+1)+'/'+pts.length+' \u2192';
+        }
+        return;
+      }
+      // Default: swipe through days
       var days=getDays();
-      if(dx<0 && ad<days.length-1) sel(ad+1);
-      else if(dx>0 && ad>0) sel(ad-1);
+      if(dx<0 && ad!==null && ad<days.length-1) sel(ad+1);
+      else if(dx>0 && ad!==null && ad>0) sel(ad-1);
     }
   },{passive:true});
 })();
@@ -898,3 +925,9 @@ if(window.innerWidth<=768 && ad!==null){
   else if(initBounds.length===1)map.setView(initBounds[0],11);
   setTimeout(function(){highlightDayMarkers(initD.points);},100);
 }
+// georgia.to ON by default
+buildPlacesMarkers();
+placesLayer.addTo(map);
+placesVisible=true;
+var ptBtn=document.getElementById('placesToggle');
+if(ptBtn) ptBtn.classList.add('on');
