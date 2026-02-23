@@ -118,7 +118,25 @@ var hiddenPlaceCats={};
 
 function buildPlacesMarkers(){
   if(placesBuilt) return;
+  // Build ATTR lookup for dedup (coords + normalized names)
+  var attrLookup=[];
+  ATTR.forEach(function(a){
+    var norm=a.name.toLowerCase().replace(/[^a-z0-9\u0080-\uffff]/g,'');
+    attrLookup.push({lat:a.lat,lng:a.lng,norm:norm,name:a.name.toLowerCase()});
+  });
   PLACES.forEach(function(p){
+    // Skip places within 200m of any ATTR marker OR with matching name
+    var dominated=false;
+    var pnorm=p.name_pl.toLowerCase().replace(/[^a-z0-9\u0080-\uffff]/g,'');
+    for(var k=0;k<attrLookup.length;k++){
+      var a=attrLookup[k];
+      var dlat=p.lat-a.lat,dlng=p.lng-a.lng;
+      var dist=Math.sqrt(dlat*dlat+dlng*dlng)*111000;
+      if(dist<200){dominated=true;break;}
+      // Name match: one contains the other (normalized)
+      if(pnorm.length>3&&a.norm.length>3&&(pnorm.indexOf(a.norm)!==-1||a.norm.indexOf(pnorm)!==-1)){dominated=true;break;}
+    }
+    if(dominated) return;
     var cat=getPlaceCategory(p);
     var info=PLACE_CATS[cat];
     var icon=L.divIcon({
@@ -132,7 +150,7 @@ function buildPlacesMarkers(){
     var m=L.marker([p.lat,p.lng],{icon:icon});
     m.bindPopup(pop,{maxWidth:240});
     placesLayer.addLayer(m);
-    placesMarkers.push({m:m,cat:cat,color:info.color});
+    placesMarkers.push({m:m,cat:cat,color:info.color,place:p});
   });
   placesBuilt=true;
 }
@@ -935,13 +953,13 @@ function searchMarkers(query){
       hits.push({type:'attr',id:a.id,name:a.name,sub:a.cat,color:a.color});
     }
   });
-  // Search georgia.to places
+  // Search georgia.to places (only those with markers)
   if(placesBuilt){
-    PLACES.forEach(function(p,i){
+    placesMarkers.forEach(function(pm,i){
+      var p=pm.place;
       if(p.name_pl.toLowerCase().indexOf(q)!==-1||p.region.toLowerCase().indexOf(q)!==-1){
-        var cat=getPlaceCategory(p);
-        var info=PLACE_CATS[cat];
-        hits.push({type:'place',idx:i,name:p.name_pl,sub:p.region+' · '+cat,icon:info.icon,color:info.color});
+        var info=PLACE_CATS[pm.cat];
+        hits.push({type:'place',idx:i,name:p.name_pl,sub:p.region+' · '+pm.cat,icon:info.icon,color:info.color});
       }
     });
   }
@@ -970,11 +988,10 @@ function searchSelect(type,id){
   if(type==='attr'){
     flyTo(id);
   }else{
-    var p=PLACES[id];
     if(!placesVisible) togglePlaces();
-    map.setView([p.lat,p.lng],14);
-    // Find and open popup for this place marker
-    placesMarkers[id].m.openPopup();
+    var pm=placesMarkers[id];
+    map.setView(pm.m.getLatLng(),14);
+    pm.m.openPopup();
   }
 }
 // Close search results on outside click
