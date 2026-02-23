@@ -74,6 +74,99 @@ function toggleCat(color,el){
   }
 }
 
+// === PLACES OVERLAY ===
+var PLACE_CATS={
+  "Natura":       {color:"#2e7d32", keys:["Natura i Przygoda","Krajobrazy Naturalne","Spa i Wellness"]},
+  "Kultura":      {color:"#5c6bc0", keys:["Kultura i Sztuka","Kulturalny i Artystyczny","Historia","Miejsca historyczne","Miejsca historyczne i archeologiczne"]},
+  "Religia":      {color:"#8d6e63", keys:["Religia","Miejsca religijne"]},
+  "Kuchnia":      {color:"#ff8f00", keys:["Kuchnia"]},
+  "Rozrywka":     {color:"#ec407a", keys:["Rozrywka","Rekreacja i rozrywka","Rodzina"]},
+  "Architektura": {color:"#78909c", keys:["Struktury Architektoniczne","Atrakcje miejskie"]},
+  "Inne":         {color:"#bdbdbd", keys:[]}
+};
+
+function getPlaceCategory(place){
+  var tags=place.tags||[];
+  var flat=[];
+  tags.forEach(function(t){
+    t.split("#").forEach(function(s){flat.push(s.trim());});
+  });
+  var cats=Object.keys(PLACE_CATS);
+  for(var i=0;i<cats.length-1;i++){
+    var cat=cats[i];
+    for(var j=0;j<flat.length;j++){
+      if(PLACE_CATS[cat].keys.indexOf(flat[j])!==-1) return cat;
+    }
+  }
+  return "Inne";
+}
+
+var placesLayer=L.layerGroup();
+var placesVisible=false;
+var placesBuilt=false;
+var placesMarkers=[];
+var hiddenPlaceCats={};
+
+function buildPlacesMarkers(){
+  if(placesBuilt) return;
+  PLACES.forEach(function(p){
+    var cat=getPlaceCategory(p);
+    var color=PLACE_CATS[cat].color;
+    var icon=L.divIcon({
+      html:'<div class="pm" style="background:'+color+'"></div>',
+      iconSize:[10,10],iconAnchor:[5,5],className:""
+    });
+    var pop='<b>'+p.name_pl+'</b>';
+    pop+='<div style="font-size:10px;color:#5f6368;margin:2px 0">'+p.region+' · '+cat+'</div>';
+    if(p.tags&&p.tags.length) pop+='<div style="font-size:9px;color:#9aa0a6">'+p.tags.join(", ")+'</div>';
+    pop+='<a class="pop-link pop-link-gt" href="https://georgia.to'+p.url+'" target="_blank">&#127468;&#127466; Wiecej na georgia.to →</a>';
+    var m=L.marker([p.lat,p.lng],{icon:icon});
+    m.bindPopup(pop,{maxWidth:240});
+    placesLayer.addLayer(m);
+    placesMarkers.push({m:m,cat:cat,color:color});
+  });
+  placesBuilt=true;
+}
+
+function togglePlaces(){
+  if(placesVisible){
+    map.removeLayer(placesLayer);
+    placesVisible=false;
+  }else{
+    buildPlacesMarkers();
+    placesLayer.addTo(map);
+    placesVisible=true;
+  }
+  var btn=document.getElementById('placesToggle');
+  if(btn) btn.classList.toggle('on',placesVisible);
+  var btnM=document.getElementById('placesToggleMobile');
+  if(btnM) btnM.classList.toggle('on',placesVisible);
+  var filters=document.querySelectorAll('.places-cats');
+  filters.forEach(function(el){el.style.display=placesVisible?'flex':'none';});
+  // Re-render mobile overlay if open
+  var ov=document.getElementById("mapFilterOverlay");
+  if(ov&&ov.classList.contains("show")){
+    ov.classList.remove("show");
+    toggleMapFilters();
+  }
+}
+
+function togglePlaceCat(cat,el){
+  if(hiddenPlaceCats[cat]){
+    delete hiddenPlaceCats[cat];
+    el.classList.remove('off');
+  }else{
+    hiddenPlaceCats[cat]=true;
+    el.classList.add('off');
+  }
+  placesMarkers.forEach(function(pm){
+    if(pm.cat===cat){
+      if(hiddenPlaceCats[cat]) placesLayer.removeLayer(pm.m);
+      else placesLayer.addLayer(pm.m);
+    }
+  });
+}
+
 // === TRASY ===
 var lineA=L.polyline(routeA,{color:"#1a73e8",weight:2,opacity:0.4,dashArray:"6,8"}).addTo(map);
 var lineB=L.polyline(routeB,{color:"#f9ab00",weight:2,opacity:0.4,dashArray:"6,8"}).addTo(map);
