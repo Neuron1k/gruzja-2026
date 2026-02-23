@@ -90,6 +90,10 @@
 </div>
 </div>
 <div id="map"></div>
+<div class="map-search" id="mapSearch">
+<input type="text" id="mapSearchInput" placeholder="Szukaj atrakcji..." oninput="searchMarkers(this.value)">
+<div class="map-search-results" id="mapSearchResults"></div>
+</div>
 <button class="map-filter-btn" onclick="toggleMapFilters()" title="Filtry">🔍</button>
 <div class="map-filter-overlay" id="mapFilterOverlay"></div>
 

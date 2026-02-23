@@ -859,9 +859,23 @@ window.addEventListener('resize',function(){
         var days=getDays(),pts=days[ad].points;
         if(pts&&pts.length>0){
           if(currentPointIdx===null) currentPointIdx=0;
-          if(dx<0 && currentPointIdx<pts.length-1) currentPointIdx++;
-          else if(dx>0 && currentPointIdx>0) currentPointIdx--;
+          if(dx<0){
+            if(currentPointIdx<pts.length-1) currentPointIdx++;
+            else if(ad<days.length-1){sel(ad+1);return;}
+          }else if(dx>0){
+            if(currentPointIdx>0) currentPointIdx--;
+            else if(ad>0){sel(ad-1);currentPointIdx=getDays()[ad].points.length-1;return;}
+          }
           flyTo(pts[currentPointIdx]);
+          // Highlight current attraction marker
+          highlightDayMarkers(pts);
+          setTimeout(function(){
+            var pid=pts[currentPointIdx];
+            if(markers[pid]){
+              var el=markers[pid].m.getElement&&markers[pid].m.getElement();
+              if(el){var dot=el.querySelector('.cm');if(dot){dot.classList.add('cm-highlight');}}
+            }
+          },250);
           var ind=document.getElementById('attrIndicator');
           if(ind) ind.textContent='\u2190 Atrakcja '+(currentPointIdx+1)+'/'+pts.length+' \u2192';
         }
@@ -907,6 +921,70 @@ function drawerTab(tab){
   });
   mainTab(tab,btn);
 }
+
+// === SEARCH ===
+function searchMarkers(query){
+  var results=document.getElementById('mapSearchResults');
+  if(!results) return;
+  if(!query||query.length<2){results.innerHTML='';results.classList.remove('show');return;}
+  var q=query.toLowerCase();
+  var hits=[];
+  // Search ATTR markers
+  ATTR.forEach(function(a){
+    if(a.name.toLowerCase().indexOf(q)!==-1||a.cat.toLowerCase().indexOf(q)!==-1){
+      hits.push({type:'attr',id:a.id,name:a.name,sub:a.cat,color:a.color});
+    }
+  });
+  // Search georgia.to places
+  if(placesBuilt){
+    PLACES.forEach(function(p,i){
+      if(p.name_pl.toLowerCase().indexOf(q)!==-1||p.region.toLowerCase().indexOf(q)!==-1){
+        var cat=getPlaceCategory(p);
+        var info=PLACE_CATS[cat];
+        hits.push({type:'place',idx:i,name:p.name_pl,sub:p.region+' · '+cat,icon:info.icon,color:info.color});
+      }
+    });
+  }
+  if(hits.length===0){results.innerHTML='<div class="map-search-result"><span class="sr-sub">Brak wynikow</span></div>';results.classList.add('show');return;}
+  var h='';
+  hits.slice(0,15).forEach(function(hit){
+    if(hit.type==='attr'){
+      h+='<div class="map-search-result" onclick="searchSelect(\'attr\',\''+hit.id+'\')">';
+      h+='<div class="leg-d" style="background:'+hit.color+';width:8px;height:8px;border-radius:50%;flex-shrink:0"></div>';
+      h+='<div><div class="sr-name">'+hit.name+'</div><div class="sr-sub">'+hit.sub+'</div></div></div>';
+    }else{
+      h+='<div class="map-search-result" onclick="searchSelect(\'place\','+hit.idx+')">';
+      h+='<span class="material-symbols-outlined" style="color:'+hit.color+';font-size:14px">'+hit.icon+'</span>';
+      h+='<div><div class="sr-name">'+hit.name+'</div><div class="sr-sub">'+hit.sub+'</div></div></div>';
+    }
+  });
+  if(hits.length>15) h+='<div class="map-search-result"><span class="sr-sub">...i '+(hits.length-15)+' wiecej</span></div>';
+  results.innerHTML=h;
+  results.classList.add('show');
+}
+function searchSelect(type,id){
+  var input=document.getElementById('mapSearchInput');
+  var results=document.getElementById('mapSearchResults');
+  if(input) input.value='';
+  if(results){results.innerHTML='';results.classList.remove('show');}
+  if(type==='attr'){
+    flyTo(id);
+  }else{
+    var p=PLACES[id];
+    if(!placesVisible) togglePlaces();
+    map.setView([p.lat,p.lng],14);
+    // Find and open popup for this place marker
+    placesMarkers[id].m.openPopup();
+  }
+}
+// Close search results on outside click
+document.addEventListener('click',function(e){
+  var search=document.getElementById('mapSearch');
+  if(search&&!search.contains(e.target)){
+    var results=document.getElementById('mapSearchResults');
+    if(results){results.innerHTML='';results.classList.remove('show');}
+  }
+});
 
 // === INIT ===
 if(window.innerWidth<=768) ad=0;

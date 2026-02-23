@@ -278,3 +278,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;dis
 .bs-content details.ds summary h4{margin:0}
 /* === ATTRACTION INDICATOR === */
 .attr-indicator{text-align:center;font-size:10px;color:#9aa0a6;padding:4px 0;letter-spacing:.3px}
+/* === MAP SEARCH === */
+.map-search{position:fixed;top:10px;left:420px;z-index:1500;width:280px}
+.map-search input{width:100%;padding:8px 12px;border:none;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:13px;font-family:inherit;outline:none;background:#fff}
+.map-search input:focus{box-shadow:0 2px 12px rgba(26,115,232,.4)}
+.map-search-results{background:#fff;border-radius:0 0 8px 8px;box-shadow:0 4px 12px rgba(0,0,0,.2);max-height:300px;overflow-y:auto;display:none}
+.map-search-results.show{display:block}
+.map-search-result{padding:8px 12px;cursor:pointer;font-size:12px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:6px}
+.map-search-result:hover{background:#f8f9fa}
+.map-search-result:last-child{border-bottom:none}
+.map-search-result .sr-name{font-weight:600;color:#202124}
+.map-search-result .sr-sub{font-size:10px;color:#9aa0a6}
+@media(max-width:768px){
+  .map-search{top:10px;left:10px;right:60px;width:auto}
+}
